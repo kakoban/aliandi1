@@ -1,0 +1,748 @@
+/* ==========================================================================
+   Binance Exchange Layout & Navigation Patterns
+   ========================================================================== */
+
+.wrap {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   Top Navbar (Binance Exchange Style)
+   ========================================================================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(11, 14, 17, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  height: 64px;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 20px;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 42px;
+  object-fit: contain;
+  background: #FFFFFF;
+  border-radius: var(--radius-xs);
+  padding: 1px;
+  box-shadow: 0 0 10px rgba(240, 185, 11, 0.25);
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-primary);
+  color: #0B0E11;
+  border-radius: var(--radius-xs);
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1;
+  box-shadow: 0 0 12px rgba(240, 185, 11, 0.35);
+}
+
+.brand-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.brand-text small {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  color: var(--brand-primary);
+  direction: ltr;
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 1;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 8px 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-links a:hover {
+  color: var(--brand-primary);
+}
+
+.nav-links a.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--brand-primary);
+  border-radius: 2px;
+}
+
+/* Nav Social Icons Group */
+.nav-socials {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-inline-start: 8px;
+  border-inline-start: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.nav-social-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-social-btn:hover {
+  color: var(--brand-primary);
+  background: var(--bg-surface-alt);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.nav-social-btn.tv:hover {
+  color: #2962FF;
+  border-color: rgba(41, 98, 255, 0.4);
+}
+
+.nav-social-btn.x:hover {
+  color: var(--text-primary);
+}
+
+.nav-social-btn.tg:hover {
+  color: #2AABEE;
+  border-color: rgba(42, 171, 238, 0.4);
+}
+
+/* Actions on Right Side of Nav */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Nav Sub Badge */
+.nav-sub-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+
+.nav-sub-badge.free {
+  background: var(--bg-surface-alt);
+  color: var(--brand-primary);
+  border: 1px solid rgba(240, 185, 11, 0.3);
+}
+
+.nav-sub-badge.free:hover {
+  background: var(--brand-primary-bg);
+  border-color: var(--brand-primary);
+}
+
+.nav-sub-badge.active {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+  box-shadow: 0 0 10px rgba(14, 203, 129, 0.2);
+}
+
+.nav-sub-badge i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==========================================================================
+   Binance-Style Language Dropdown Switcher
+   ========================================================================== */
+.lang-dropdown-wrap {
+  position: relative;
+}
+
+.btn-lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  color: var(--text-primary-soft);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.btn-lang-toggle:hover {
+  background: var(--bg-surface-alt);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.lang-globe-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.lang-current-code {
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  width: 170px;
+  background: #1E2329;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  z-index: 300;
+  overflow: hidden;
+  padding: 6px 0;
+  display: none;
+}
+
+.lang-dropdown-menu.show {
+  display: block;
+}
+
+.lang-option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary-soft);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: background var(--transition-fast);
+}
+
+.lang-option-item:hover {
+  background: var(--bg-surface-hover);
+  color: var(--brand-primary);
+}
+
+.lang-option-item.active {
+  color: var(--brand-primary);
+  background: rgba(240, 185, 11, 0.08);
+}
+
+.lang-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-flag {
+  font-size: 14px;
+}
+
+.lang-check-icon {
+  color: var(--brand-primary);
+  font-size: 12px;
+  display: none;
+}
+
+.lang-option-item.active .lang-check-icon {
+  display: inline;
+}
+
+/* Legacy Support */
+.lang-switcher {
+  display: none;
+}
+
+/* ==========================================================================
+   Live Market Ticker Strip (Binance Ticker Bar)
+   ========================================================================== */
+.market-strip {
+  background-color: #12161A;
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  padding: 8px 0;
+}
+
+.market-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.market-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  direction: ltr;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  font-size: 12px;
+}
+
+.ticker-item:hover {
+  background-color: var(--bg-surface-alt);
+}
+
+.ticker-symbol {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ticker-price {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary-soft);
+}
+
+.ticker-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+.ticker-change.up {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.ticker-change.down {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+  padding: 56px 0 40px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--brand-primary);
+  direction: ltr;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+  margin: 0 0 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--brand-primary);
+  display: block;
+}
+
+html[lang="fa"] .hero h1 {
+  line-height: 1.55;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  max-width: 540px;
+  margin: 0 0 24px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.hero .tiny {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+/* Terminal Preview Card */
+.terminal {
+  background: var(--bg-surface);
+  color: var(--text-primary-soft);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.terminal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+  font-family: var(--font-mono);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dots i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  background: var(--border-strong);
+  border-radius: 50%;
+}
+
+.terminal-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 18px;
+}
+
+.hero-value {
+  font-size: 38px;
+  font-weight: 700;
+  direction: ltr;
+  text-align: start;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin: 6px 0;
+  color: var(--brand-primary);
+  font-family: var(--font-mono);
+}
+
+.hero-value small {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.terminal dl {
+  margin: 16px 0 6px;
+}
+
+.terminal dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--border-subtle);
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+.terminal dt {
+  color: var(--text-secondary);
+}
+
+.terminal dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  direction: ltr;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.trade-lines {
+  position: relative;
+  padding: 8px 14px;
+  margin-top: 16px;
+  background: #15181C;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  direction: ltr;
+}
+
+.trade-lines div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.trade-lines span {
+  flex: 1;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.trade-lines .tp {
+  color: var(--success);
+}
+
+.trade-lines .entry {
+  color: var(--brand-primary);
+}
+
+.trade-lines .sl {
+  color: var(--danger);
+}
+
+/* ==========================================================================
+   Three-Pillar Strip
+   ========================================================================== */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 48px;
+  background-color: rgba(30, 35, 41, 0.4);
+}
+
+.strip div {
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.strip strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.strip small {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.strip div + div {
+  border-inline-start: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+section {
+  margin-bottom: 56px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.section-head h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin: 6px 0 0;
+  color: var(--text-primary);
+}
+
+.section-head p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 32px 0 44px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background-color: #080A0C;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.footer b {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.footer a {
+  color: var(--brand-primary);
+  transition: color var(--transition-fast);
+}
+
+.footer a:hover {
+  color: var(--brand-primary-alt);
+}
+
+/* Mobile Fixed Bottom CTA */
+.mobile-buy {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .nav-links {
+    gap: 14px;
+  }
+  .nav-links a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav-sub-badge {
+    display: none;
+  }
+  .nav-socials {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 0;
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-sub-badge {
+    display: none;
+  }
+  .strip {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .strip div + div {
+    border-inline-start: 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .mobile-buy {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: 90;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(11, 14, 17, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 10px 18px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border-subtle);
+  }
+  .footer {
+    padding-bottom: 80px;
+  }
+}

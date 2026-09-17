@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.bak
+.claude/
+.agents/
+skills-lock.json
+mrsignalll.db
+پکیج_ارائه_کلیم_خط۱۰/

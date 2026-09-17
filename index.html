@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0E11">
+  <meta name="description" content="ماشین‌حساب حرفه‌ای حجم پوزیشن و مدیریت ریسک فیوچرز MRSIGNALLL با استانداردهای بصری بایننس و درگاه کریپتو والکس.">
+  <title>MRSIGNALLL | ماشین‌حساب حرفه‌ای ریسک و حجم پوزیشن</title>
+
+  <!-- Modular Binance-Style CSS Architecture -->
+  <link rel="stylesheet" href="css/binance-theme.css?v=4">
+  <link rel="stylesheet" href="css/layout.css?v=4">
+  <link rel="stylesheet" href="css/calculator.css?v=4">
+  <link rel="stylesheet" href="css/wallex-payment.css?v=4">
+  <link rel="stylesheet" href="css/components.css?v=4">
+  <link rel="stylesheet" href="css/auth.css?v=4">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Top Navbar (Binance Exchange Layout)
+       ========================================================================== -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#">
+        <img src="img/logo.jpg" class="brand-logo" alt="MRSIGNALLL">
+        <div class="brand-text">
+          <strong>MRSIGNALLL</strong>
+          <small><svg class="binance-logo-icon" width="12" height="12" viewBox="0 0 24 24" fill="#F0B90B" style="vertical-align:middle;margin-inline-end:3px;"><path d="M12 2L8.5 5.5L12 9L15.5 5.5L12 2ZM5.5 8.5L2 12L5.5 15.5L9 12L5.5 8.5ZM18.5 8.5L15 12L18.5 15.5L22 12L18.5 8.5ZM12 15L8.5 18.5L12 22L15.5 18.5L12 15ZM12 10.2L10.2 12L12 13.8L13.8 12L12 10.2Z"/></svg>BINANCE FUTURES PRO</small>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#calculator" class="active" data-fa="ماشین‌حساب" data-en="Calculator">ماشین‌حساب</a>
+        <a href="#features" data-fa="امکانات" data-en="Features">امکانات</a>
+        <a href="#purchase" data-fa="حمایت مالی (دونیت)" data-en="Support &amp; Donate">حمایت مالی (دونیت)</a>
+        <div class="nav-socials">
+          <a href="https://www.tradingview.com/u/mrsignalll/" target="_blank" rel="noopener noreferrer" class="nav-social-btn tv" title="TradingView (@mrsignalll)">
+            <svg width="15" height="15" viewBox="0 0 36 28" fill="currentColor"><path d="M14 22H7V6h7v16zm8-16h-6v22h6V6zm8 7h-6v15h6V13z"/></svg>
+          </a>
+          <a href="https://x.com/Mrsignall" target="_blank" rel="noopener noreferrer" class="nav-social-btn x" title="X / Twitter (@Mrsignall)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://t.me/MRSIGNALLL" target="_blank" rel="noopener noreferrer" class="nav-social-btn tg" title="Telegram (@MRSIGNALLL)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.13 7.19c-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.2-.18.06-.23-.05-.18-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- User Authentication & Profile Menu -->
+        <div class="auth-nav-wrap">
+          <button type="button" class="btn-auth-nav" id="btnOpenAuth" onclick="openAuthModal('telegram')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            <span data-fa="ورود / ثبت‌نام" data-en="Log In / Sign Up">ورود / ثبت‌نام</span>
+          </button>
+
+          <div class="user-chip-wrap" id="userChipWrap" style="display:none;">
+            <div class="user-chip" id="userChip" onclick="toggleUserDropdown()">
+              <div class="user-avatar" id="userAvatarText">U</div>
+              <span class="user-name-text" id="userNameText">User</span>
+              <span class="role-badge free" id="userRoleBadge">عادی</span>
+              <span style="font-size:9px;color:var(--text-secondary)">▾</span>
+            </div>
+
+            <!-- User Dropdown Menu -->
+            <div class="user-dropdown" id="userDropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-user-title">
+                  <span id="dropUserTitle">User</span>
+                </div>
+                <div class="dropdown-sub-status" id="dropSubStatus">پلن کاربری: رایگان</div>
+              </div>
+              <div class="dropdown-menu-list">
+                <a href="#purchase" class="dropdown-item" onclick="toggleUserDropdown(false)">
+                  <span>☕</span>
+                  <span data-fa="حمایت مالی از پروژه (دونیت)" data-en="Support &amp; Donate">حمایت مالی از پروژه (دونیت)</span>
+                </a>
+                <button type="button" class="dropdown-item admin-link" id="dropAdminItem" style="display:none;" onclick="openAdminModal()">
+                  <span>⚡</span>
+                  <span data-fa="پنل مدیریت مدیر سیستم" data-en="Admin Management Panel">پنل مدیریت مدیر سیستم</span>
+                </button>
+                <button type="button" class="dropdown-item logout" onclick="logout()">
+                  <span>🚪</span>
+                  <span data-fa="خروج از حساب کاربری" data-en="Log Out">خروج از حساب کاربری</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="nav-sub-badge free" id="navSubBadge" href="#purchase">
+          <i></i><span data-fa="☕ حمایت مالی از پروژه" data-en="☕ Support &amp; Donate">☕ حمایت مالی از پروژه</span>
+        </a>
+        <!-- Binance-Style Language Dropdown Menu -->
+        <div class="lang-dropdown-wrap" id="langDropdownWrap">
+          <button type="button" class="btn-lang-toggle" id="btnLangToggle" onclick="toggleLangDropdown()">
+            <span class="lang-globe-icon">🌐</span>
+            <span class="lang-current-code" id="langCurrentCode">FA</span>
+            <span style="font-size:9px;color:var(--text-secondary)">▾</span>
+          </button>
+
+          <div class="lang-dropdown-menu" id="langDropdownMenu">
+            <button type="button" class="lang-option-item" data-lang-code="en" onclick="selectLanguage('en')">
+              <span class="lang-item-left"><span class="lang-flag">🇬🇧</span><span>English</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+            <button type="button" class="lang-option-item" data-lang-code="ar" onclick="selectLanguage('ar')">
+              <span class="lang-item-left"><span class="lang-flag">🇦🇪</span><span>العربية</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+            <button type="button" class="lang-option-item" data-lang-code="tr" onclick="selectLanguage('tr')">
+              <span class="lang-item-left"><span class="lang-flag">🇹🇷</span><span>Türkçe</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+            <button type="button" class="lang-option-item" data-lang-code="ru" onclick="selectLanguage('ru')">
+              <span class="lang-item-left"><span class="lang-flag">🇷🇺</span><span>Русский</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+            <button type="button" class="lang-option-item" data-lang-code="es" onclick="selectLanguage('es')">
+              <span class="lang-item-left"><span class="lang-flag">🇪🇸</span><span>Español</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+            <button type="button" class="lang-option-item active" data-lang-code="fa" onclick="selectLanguage('fa')">
+              <span class="lang-item-left"><span class="lang-flag">🇮🇷</span><span>فارسی</span></span>
+              <span class="lang-check-icon">✓</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Toggle Button (Dark / Light) -->
+        <button type="button" class="btn-theme-toggle" id="btnThemeToggle" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode" title="تغییر تم تاریک / روشن">
+          <svg class="theme-icon theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       2. Market Ticker Strip (Binance Live Futures Tickers)
+       ========================================================================== -->
+  <div class="market-strip" aria-label="Live Market Ticker">
+    <div class="wrap market-strip-inner">
+      <div class="ticker-item" onclick="setCoin('BTC')">
+        <span class="ticker-symbol">BTC/USDT</span>
+        <span class="ticker-price">65,000.00</span>
+        <span class="ticker-change up">▲ +2.45%</span>
+      </div>
+      <div class="ticker-item" onclick="setCoin('ETH')">
+        <span class="ticker-symbol">ETH/USDT</span>
+        <span class="ticker-price">3,500.00</span>
+        <span class="ticker-change up">▲ +1.82%</span>
+      </div>
+      <div class="ticker-item" onclick="setCoin('SOL')">
+        <span class="ticker-symbol">SOL/USDT</span>
+        <span class="ticker-price">150.00</span>
+        <span class="ticker-change down">▼ -0.65%</span>
+      </div>
+      <div class="ticker-item" onclick="setCoin('BNB')">
+        <span class="ticker-symbol">BNB/USDT</span>
+        <span class="ticker-price">580.00</span>
+        <span class="ticker-change up">▲ +3.10%</span>
+      </div>
+      <div class="ticker-item" onclick="setCoin('XRP')">
+        <span class="ticker-symbol">XRP/USDT</span>
+        <span class="ticker-price">0.5800</span>
+        <span class="ticker-change up">▲ +0.94%</span>
+      </div>
+      <div class="ticker-item" onclick="setCoin('DOGE')">
+        <span class="ticker-symbol">DOGE/USDT</span>
+        <span class="ticker-price">0.1200</span>
+        <span class="ticker-change down">▼ -1.20%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       3. Main Wrap & Hero Section
+       ========================================================================== -->
+  <main class="wrap">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">MRSIGNALLL / POSITION CALCULATOR PRO</span>
+        <h1>
+          <span data-fa="قبل از ورود به معامله،" data-en="Before your next trade,">قبل از ورود به معامله،</span>
+          <em data-fa="ریسکت را حساب کن." data-en="know your exact risk.">ریسکت را حساب کن.</em>
+        </h1>
+        <p data-fa="از سرمایه و حد ضرر، به حجم پوزیشن، مارجین و برآورد اهرم برس. ماشین‌حساب حرفه‌ای MRSIGNALLL سناریوی معامله را پیش از ورود، به اعداد دقیق و قابل‌بررسی تبدیل می‌کند." data-en="Turn your balance and stop loss into exact position size, required margin and leverage estimate. MRSIGNALLL makes your trade plan measurable before you enter.">از سرمایه و حد ضرر، به حجم پوزیشن، مارجین و برآورد اهرم برس. ماشین‌حساب حرفه‌ای MRSIGNALLL سناریوی معامله را پیش از ورود، به اعداد دقیق و قابل‌بررسی تبدیل می‌کند.</p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#calculator" data-fa="محاسبه سناریو دمو" data-en="Calculate Trade Demo">محاسبه سناریو دمو</a>
+          <a class="btn dark" href="#purchase" data-fa="حمایت مالی از پروژه (دونیت) ☕" data-en="Support &amp; Donate ☕">حمایت مالی از پروژه (دونیت) ☕</a>
+        </div>
+
+        <p class="tiny" data-fa="ویژهٔ قراردادهای خطی USDT فیوچرز بایننس · کارمزدها در محاسبات · بدون نیاز به اتصال ولت" data-en="Built for Binance USDT-M Futures · Integrated Trading Fees · No Wallet Connection Required">ویژهٔ قراردادهای خطی USDT فیوچرز بایننس · کارمزدها در محاسبات · بدون نیاز به اتصال ولت</p>
+      </div>
+
+      <!-- Hero Visual Terminal Card (Binance Dark Surface) -->
+      <div class="terminal" aria-label="Illustrative trade example">
+        <div class="terminal-top">
+          <span>TRADE PREVIEW / BTCUSDT</span>
+          <span class="dots"><i></i><i></i><i></i></span>
+        </div>
+        <div class="terminal-label" data-fa="بودجهٔ ریسک در این سناریو" data-en="Risk budget in this scenario">بودجهٔ ریسک در این سناریو</div>
+        <div class="hero-value"><span id="heroNotionalVal">10.00</span> <small>USDT</small></div>
+
+        <dl>
+          <div>
+            <dt data-fa="موجودی حساب" data-en="Account Balance">موجودی حساب</dt>
+            <dd id="heroBalanceVal">1,000.00 USDT</dd>
+          </div>
+          <div>
+            <dt data-fa="ریسک انتخابی" data-en="Selected Risk">ریسک انتخابی</dt>
+            <dd id="heroRiskPctVal">1.00%</dd>
+          </div>
+          <div>
+            <dt data-fa="فاصلهٔ حد ضرر" data-en="Stop Distance">فاصلهٔ حد ضرر</dt>
+            <dd id="heroStopDistVal">2.00%</dd>
+          </div>
+        </dl>
+
+        <div class="trade-lines">
+          <div class="tp">TAKE PROFIT (▲)<span></span><b id="heroTpLine">68,900.00</b></div>
+          <div class="entry">ENTRY PRICE<span></span><b id="heroEntryLine">65,000.00</b></div>
+          <div class="sl">STOP LOSS (▼)<span></span><b id="heroSlLine">63,700.00</b></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Three-Pillar Strip -->
+    <div class="strip">
+      <div>
+        <strong data-fa="ریسک، پیش از ورود" data-en="Risk before entry">ریسک، پیش از ورود</strong>
+        <small data-fa="محاسبه حجم دقیق بر اساس استاپ" data-en="Exact size from your stop loss">محاسبه حجم دقیق بر اساس استاپ</small>
+      </div>
+      <div>
+        <strong data-fa="کارمزد در محاسبات" data-en="Fees in the equation">کارمزد در محاسبات</strong>
+        <small data-fa="هزینهٔ ورود و خروج میکر/تیکر" data-en="Maker/Taker entry and exit costs">هزینهٔ ورود و خروج میکر/تیکر</small>
+      </div>
+      <div>
+        <strong data-fa="استاندارد صرافی بایننس" data-en="Binance Standard UI">استاندارد صرافی بایننس</strong>
+        <small data-fa="اعداد تبولار، بدون لرزش رقم‌ها" data-en="Tabular figures & clean data tables">اعداد تبولار، بدون لرزش رقم‌ها</small>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         4. Section 01: Calculator Dashboard
+         ========================================================================== -->
+    <section id="calculator">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">01 / INTERACTIVE DEMO</span>
+          <h2 data-fa="سناریوی معاملاتی خود را بسازید" data-en="Build your trade scenario">سناریوی معاملاتی خود را بسازید</h2>
+          <p data-fa="ورودی‌ها را تغییر دهید؛ خروجی اندازه، مارجین و ریسک را بی‌درنگ مشاهده کنید." data-en="Adjust inputs; instantly observe position notional, margin, and risk.">ورودی‌ها را تغییر دهید؛ خروجی اندازه، مارجین و ریسک را بی‌درنگ مشاهده کنید.</p>
+        </div>
+        <span class="tag tag-yellow" data-fa="قرارداد خطی USDT · مارجین ایزوله" data-en="Linear USDT Contract · Isolated Margin">قرارداد خطی USDT · مارجین ایزوله</span>
+      </div>
+
+      <div class="calculator">
+        <!-- Calculator Inputs -->
+        <form class="inputs" id="calcForm" novalidate>
+          <span class="field-label" data-fa="جهت معامله (BUY / SELL)" data-en="Trade Direction (BUY / SELL)">جهت معامله (BUY / SELL)</span>
+          <div class="segmented">
+            <button type="button" id="long" class="buy" aria-pressed="true" data-fa="خرید · LONG (▲)" data-en="Buy · LONG (▲)">خرید · LONG (▲)</button>
+            <button type="button" id="short" class="sell" aria-pressed="false" data-fa="فروش · SHORT (▼)" data-en="Sell · SHORT (▼)">فروش · SHORT (▼)</button>
+          </div>
+
+          <!-- Popular Coin Chips -->
+          <div class="chips" id="coins">
+            <button type="button" data-coin="BTC" aria-pressed="true">BTC</button>
+            <button type="button" data-coin="ETH" aria-pressed="false">ETH</button>
+            <button type="button" data-coin="SOL" aria-pressed="false">SOL</button>
+            <button type="button" data-coin="BNB" aria-pressed="false">BNB</button>
+            <button type="button" data-coin="XRP" aria-pressed="false">XRP</button>
+            <button type="button" data-coin="DOGE" aria-pressed="false">DOGE</button>
+            <button type="button" data-coin="SUI" aria-pressed="false">SUI</button>
+            <button type="button" data-coin="ADA" aria-pressed="false">ADA</button>
+            <button type="button" data-coin="1000PEPE" aria-pressed="false">1000PEPE</button>
+          </div>
+
+          <!-- Quote Row -->
+          <div class="quote-row">
+            <div class="field">
+              <label for="symbol" data-fa="نماد پایه (مثال: BTC یا ETH)" data-en="Base Symbol (e.g. BTC or ETH)">نماد پایه (مثال: BTC یا ETH)</label>
+              <input id="symbol" type="text" value="BTC" maxlength="20" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();fetchPrice();}">
+            </div>
+            <button type="button" class="btn primary" id="fetchPrice" data-fa="🔄 به‌روزرسانی قیمت لحظه‌ای" data-en="🔄 Refresh Live Price">🔄 به‌روزرسانی قیمت لحظه‌ای</button>
+          </div>
+
+          <p class="status" id="quoteStatus" role="status">حالت مثال آموزشی؛ برای محاسبه دقیق قیمت زنده را دریافت کنید.</p>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="balance" data-fa="موجودی حساب (USDT)" data-en="Account Balance (USDT)">موجودی حساب (USDT)</label>
+              <input id="balance" type="number" value="1000" min="0.01" step="any" inputmode="decimal">
+            </div>
+            <div class="field">
+              <label for="risk" data-fa="ریسک در هر معامله (%)" data-en="Risk per trade (%)">ریسک در هر معامله (%)</label>
+              <input id="risk" type="number" value="1" min="0.01" max="100" step="any" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="entry" data-fa="قیمت ورود (USDT)" data-en="Entry Price (USDT)">قیمت ورود (USDT)</label>
+              <input id="entry" type="number" value="65000" min="0" step="any" inputmode="decimal">
+            </div>
+            <div class="field">
+              <label for="stop" data-fa="حد ضرر (USDT)" data-en="Stop Loss (USDT)">حد ضرر (USDT)</label>
+              <input id="stop" type="number" value="63700" min="0" step="any" inputmode="decimal">
+            </div>
+          </div>
+
+          <!-- Quick Stop Chips -->
+          <div class="quick">
+            <span data-fa="فاصلهٔ سریع استاپ:" data-en="Quick stop distance:">فاصلهٔ سریع استاپ:</span>
+            <button type="button" data-stop="1">1%</button>
+            <button type="button" data-stop="2">2%</button>
+            <button type="button" data-stop="3">3%</button>
+            <button type="button" data-stop="5">5%</button>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="target" data-fa="حد سود اختیاری (USDT)" data-en="Take Profit (optional, USDT)">حد سود اختیاری (USDT)</label>
+              <input id="target" type="number" value="68900" min="0" step="any" inputmode="decimal">
+            </div>
+            <div class="field">
+              <label for="marginPct" data-fa="بودجه مارجین از حساب (%)" data-en="Margin budget (% of balance)">بودجه مارجین از حساب (%)</label>
+              <input id="marginPct" type="number" value="10" min="0.01" max="100" step="any" inputmode="decimal">
+            </div>
+          </div>
+
+          <label class="check">
+            <input id="feesInRisk" type="checkbox" checked>
+            <span data-fa="کارمزد ورود و خروج داخل بودجهٔ ریسک لحاظ شود" data-en="Include entry and exit fees in risk budget">کارمزد ورود و خروج داخل بودجهٔ ریسک لحاظ شود</span>
+          </label>
+
+          <!-- Advanced Fee & MMR Settings -->
+          <details class="advanced">
+            <summary data-fa="▾ تنظیمات کارمزد صرافی و سقف اهرم" data-en="▾ Fee rate and leverage limit settings">▾ تنظیمات کارمزد صرافی و سقف اهرم</summary>
+            <div class="grid2">
+              <div class="field">
+                <label for="fee" data-fa="کارمزد هر طرف (%)" data-en="Fee per side (%)">کارمزد هر طرف (%)</label>
+                <input id="fee" type="number" value="0.05" min="0" max="10" step="any" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="maxLev" data-fa="سقف اهرم انتخابی" data-en="Max leverage cap">سقف اهرم انتخابی</label>
+                <input id="maxLev" type="number" value="20" min="1" max="125" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="mmr" data-fa="نرخ مارجین نگهداری (%)" data-en="Maintenance margin rate (%)">نرخ مارجین نگهداری (%)</label>
+                <input id="mmr" type="number" value="0.5" min="0" max="99" step="any" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="buffer" data-fa="فاصله اضافی مدل از استاپ (%)" data-en="Model buffer beyond stop (%)">فاصله اضافی مدل از استاپ (%)</label>
+                <input id="buffer" type="number" value="25" min="0" max="500" step="any" inputmode="decimal">
+              </div>
+            </div>
+            <p class="note" data-fa="نرخ‌ها و سقف اهرم، ورودی‌های نمونه‌اند؛ مقادیر واقعی نماد را از پنل بایننس وارد کنید." data-en="Rates and leverage caps are sample values. Enter official numbers from your Binance futures account.">نرخ‌ها و سقف اهرم، ورودی‌های نمونه‌اند؛ مقادیر واقعی نماد را از پنل بایننس وارد کنید.</p>
+          </details>
+
+          <div style="margin-top:14px">
+            <button class="btn small dark" id="reset" type="button" data-fa="بازنشانی به مقادیر پیش‌فرض" data-en="Reset to default values">بازنشانی به مقادیر پیش‌فرض</button>
+          </div>
+        </form>
+
+        <!-- Calculator Results Panel (Binance Data Table Style) -->
+        <div class="result">
+          <div class="result-heading">
+            <span data-fa="خلاصهٔ سناریو معامله" data-en="Scenario Summary">خلاصهٔ سناریو معامله</span>
+            <div id="resultSymbol">
+              <span>BTCUSDT</span>
+              <span class="result-badge long">▲ LONG</span>
+            </div>
+          </div>
+
+          <div id="error" class="alert error" role="alert" hidden></div>
+
+          <!-- Position Notional Hero Metric -->
+          <div class="result-main">
+            <label data-fa="ارزش کل پوزیشن · POSITION NOTIONAL" data-en="Position Notional (USDT)">ارزش کل پوزیشن · POSITION NOTIONAL</label>
+            <strong id="notional" data-result>—</strong>
+            <small id="quantity" data-result>—</small>
+          </div>
+
+          <!-- Two Tiles: Risk Budget & Leverage -->
+          <div class="metrics">
+            <div class="metric">
+              <span data-fa="بودجهٔ ریسک (USDT)" data-en="Risk Budget (USDT)">بودجهٔ ریسک (USDT)</span>
+              <strong id="riskCash" data-result>—</strong>
+            </div>
+            <div class="metric">
+              <span data-fa="اهرم برآوردی مدل" data-en="Estimated Leverage">اهرم برآوردی مدل</span>
+              <strong id="leverage" data-result>—</strong>
+            </div>
+          </div>
+
+          <!-- Dense Rows -->
+          <dl class="rows">
+            <div>
+              <dt data-fa="مارجین اولیهٔ تخمینی" data-en="Estimated Initial Margin">مارجین اولیهٔ تخمینی</dt>
+              <dd id="margin" data-result>—</dd>
+            </div>
+            <div>
+              <dt data-fa="کارمزد ورود و خروج در استاپ" data-en="Entry + Stop Exit Fees">کارمزد ورود و خروج در استاپ</dt>
+              <dd id="fees" data-result>—</dd>
+            </div>
+            <div>
+              <dt data-fa="زیان در استاپ با احتساب کارمزد" data-en="Stop Loss incl. Fees">زیان در استاپ با احتساب کارمزد</dt>
+              <dd id="stopLoss" data-result class="bad">—</dd>
+            </div>
+            <div>
+              <dt data-fa="تخمین قیمت لیکوئید (ایزوله)" data-en="Estimated Liquidation (Isolated)">تخمین قیمت لیکوئید (ایزوله)</dt>
+              <dd id="liq" data-result>—</dd>
+            </div>
+            <div>
+              <dt data-fa="نقطه سر‌به‌سر معامله (Break-Even)" data-en="Break-Even Price (BE)">نقطه سر‌به‌سر معامله (Break-Even)</dt>
+              <dd id="breakEven" data-result style="font-weight:700;color:var(--brand-primary)">—</dd>
+            </div>
+            <div>
+              <dt data-fa="نسبت ریوارد به ریسک (R:R)" data-en="Reward / Risk Ratio (R:R)">نسبت ریوارد به ریسک (R:R)</dt>
+              <dd id="rr" data-result>—</dd>
+            </div>
+            <div>
+              <dt data-fa="سود خالص احتمالی در هدف" data-en="Potential Net Profit at Target">سود خالص احتمالی در هدف</dt>
+              <dd id="profit" data-result class="good">—</dd>
+            </div>
+          </dl>
+
+          <div id="calcWarning" class="alert warning" role="status" hidden></div>
+
+          <p class="note" data-fa="محاسبه بر پایه قرارداد خطی USDT و مارجین ایزوله است. فاندینگ ریت، لغزش قیمت و گپ‌ها لحاظ نشده‌اند." data-en="Estimates for linear USDT contracts in isolated margin. Excludes funding rates, slippage and market gaps.">محاسبه بر پایه قرارداد خطی USDT و مارجین ایزوله است. فاندینگ ریت، لغزش قیمت و گپ‌ها لحاظ نشده‌اند.</p>
+
+          <button class="btn dark" type="button" id="copyReport" data-fa="کپی خلاصهٔ سناریوی معامله" data-en="Copy Trade Scenario">کپی خلاصهٔ سناریوی معامله</button>
+
+          <!-- ==========================================================================
+               Pro Tools: Multi-TP & Pine Script Generator (100% Free)
+               ========================================================================== -->
+          <div class="premium-tools">
+            <div class="premium-tools-head" id="togglePremiumTools">
+              <h4>
+                <span class="star-badge" style="background:var(--success-bg);color:var(--success);border-color:var(--success-border);">FREE PRO</span>
+                <span data-fa="ابزارهای پیشرفته: اهداف پلکانی و خروجی TradingView (رایگان)" data-en="Pro Tools: Multi-TP Ladder &amp; TradingView Script (Free)">ابزارهای پیشرفته: اهداف پلکانی و خروجی TradingView (رایگان)</span>
+              </h4>
+              <span style="font-size:11px;color:var(--brand-primary)" id="proToolsArrow">▴</span>
+            </div>
+
+            <!-- Active Pro Tools Box (Fully unlocked for all users) -->
+            <div id="premiumContentBox">
+              <div style="font-size:11px;font-weight:700;margin-top:8px;color:var(--brand-primary)" data-fa="اهداف پلکانی خروج (Multi-TP Ladder):" data-en="Multi-TP Ladder Targets:">اهداف پلکانی خروج (Multi-TP Ladder):</div>
+              <div class="multitp-grid">
+                <div class="multitp-col">
+                  <label>TP 1 (50%)</label>
+                  <input type="text" id="tp1Input" placeholder="قیمت تارگت ۱" data-fa-placeholder="قیمت تارگت ۱" data-en-placeholder="Target 1 Price">
+                  <span id="tp1Profit">—</span>
+                </div>
+                <div class="multitp-col">
+                  <label>TP 2 (30%)</label>
+                  <input type="text" id="tp2Input" placeholder="قیمت تارگت ۲" data-fa-placeholder="قیمت تارگت ۲" data-en-placeholder="Target 2 Price">
+                  <span id="tp2Profit">—</span>
+                </div>
+                <div class="multitp-col">
+                  <label>TP 3 (20%)</label>
+                  <input type="text" id="tp3Input" placeholder="قیمت تارگت ۳" data-fa-placeholder="قیمت تارگت ۳" data-en-placeholder="Target 3 Price">
+                  <span id="tp3Profit">—</span>
+                </div>
+              </div>
+
+              <div class="premium-actions">
+                <button type="button" class="btn small dark" id="btnExportPine" data-fa="کپی کد اندیکاتور Pine Script تریدینگ‌ویو" data-en="Copy TradingView Pine Script">کپی کد اندیکاتور Pine Script تریدینگ‌ویو</button>
+                <button type="button" class="btn small dark" id="btnExportJournal" data-fa="دانلود سناریو برای ژورنال (JSON)" data-en="Export Trade Journal (JSON)">دانلود سناریو برای ژورنال (JSON)</button>
+              </div>
+
+              <!-- Official Social & Script Links -->
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="https://www.tradingview.com/u/mrsignalll/" target="_blank" rel="noopener noreferrer" class="tv-profile-chip">
+                  <svg width="14" height="14" viewBox="0 0 36 28" fill="currentColor"><path d="M14 22H7V6h7v16zm8-16h-6v22h6V6zm8 7h-6v15h6V13z"/></svg>
+                  <span data-fa="اسکریپت‌ها و پروفایل رسمی در TradingView (@mrsignalll) ↗" data-en="Official TradingView Profile &amp; Scripts ↗">اسکریپت‌ها و پروفایل رسمی در TradingView (@mrsignalll) ↗</span>
+                </a>
+                <a href="https://x.com/Mrsignall" target="_blank" rel="noopener noreferrer" class="tv-profile-chip x-chip">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  <span data-fa="کانال رسمی در X / توییتر (@Mrsignall) ↗" data-en="Official X / Twitter (@Mrsignall) ↗">کانال رسمی در X / توییتر (@Mrsignall) ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. Section 02: Features Grid
+         ========================================================================== -->
+    <section id="features">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">02 / BUILT FOR YOUR WORKFLOW</span>
+          <h2 data-fa="تصمیم‌گیری دقیق با ارقام ملموس" data-en="Clear Decisions with Solid Numbers">تصمیم‌گیری دقیق با ارقام ملموس</h2>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="num">01</span>
+          <h3 data-fa="حجم متناسب با حد ضرر" data-en="Size From Your Stop Loss">حجم متناسب با حد ضرر</h3>
+          <p data-fa="سرمایه، درصد ریسک و فاصلهٔ استاپ را به ارزش پوزیشن و تعداد دقیق واحد رمز ارز تبدیل کنید." data-en="Convert balance, risk percentage and stop distance into position notional and coin quantity.">سرمایه، درصد ریسک و فاصلهٔ استاپ را به ارزش پوزیشن و تعداد دقیق واحد رمز ارز تبدیل کنید.</p>
+        </article>
+        <article class="feature">
+          <span class="num">02</span>
+          <h3 data-fa="شفافیت کارمزدهای صرافی" data-en="Exchange Fee Transparency">شفافیت کارمزدهای صرافی</h3>
+          <p data-fa="اثر دقیق کارمزد هر دو طرف معامله را روی حجم ورود، زیان استاپ و سود خالص تارگت بررسی کنید." data-en="Observe how maker and taker fees impact entry size, stop loss and net profit at your targets.">اثر دقیق کارمزد هر دو طرف معامله را روی حجم ورود، زیان استاپ و سود خالص تارگت بررسی کنید.</p>
+        </article>
+        <article class="feature">
+          <span class="num">03</span>
+          <h3 data-fa="مدل اهرم در کنار مارجین" data-en="Leverage Meets Margin">مدل اهرم در کنار مارجین</h3>
+          <p data-fa="برآورد اهرم را در کنار بودجهٔ مارجین و فاصلهٔ لیکوئید بسنجید؛ هشدارهای تعارض آنی نمایش داده می‌شوند." data-en="Review estimated leverage against your margin budget and liquidation distance with active conflict warnings.">برآورد اهرم را در کنار بودجهٔ مارجین و فاصلهٔ لیکوئید بسنجید؛ هشدارهای تعارض آنی نمایش داده می‌شوند.</p>
+        </article>
+        <article class="feature">
+          <span class="num">04</span>
+          <h3 data-fa="خروجی ژورنال و تریدینگ‌ویو" data-en="Journal &amp; Pine Script Export">خروجی ژورنال و تریدینگ‌ویو</h3>
+          <p data-fa="سناریوی ساخته‌شده را با یک کلیک به اسکریپت تریدینگ‌ویو تبدیل کنید یا فایل ژورنال معاملاتی را ذخیره نمایید." data-en="Turn your planned setup into a TradingView indicator script with one click or export to trade journal.">سناریوی ساخته‌شده را با یک کلیک به اسکریپت تریدینگ‌ویو تبدیل کنید یا فایل ژورنال معاملاتی را ذخیره نمایید.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. Section 03: 3 Steps
+         ========================================================================== -->
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">03 / FROM PLAN TO NUMBERS</span>
+          <h2 data-fa="سه گام تا یک سناریوی سنجیده" data-en="Three Steps to a Measured Plan">سه گام تا یک سناریوی سنجیده</h2>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <b>01 / DEFINE</b>
+          <h3 data-fa="تعیین بودجه و ریسک" data-en="Define Capital &amp; Risk">تعیین بودجه و ریسک</h3>
+          <p data-fa="موجودی کل، درصد مجاز ریسک در این ترید و سهم مارجین را وارد کنید." data-en="Specify your total account balance, maximum trade risk percentage and margin budget.">موجودی کل، درصد مجاز ریسک در این ترید و سهم مارجین را وارد کنید.</p>
+        </article>
+        <article class="step">
+          <b>02 / MODEL</b>
+          <h3 data-fa="سناریو را مدل کنید" data-en="Model The Trade">سناریو را مدل کنید</h3>
+          <p data-fa="جهت پوزیشن (Long/Short)، قیمت ورود و حد ضرر را مشخص کرده و اهداف سود را وارد کنید." data-en="Choose trade direction, set entry and stop loss levels, and define profit targets.">جهت پوزیشن (Long/Short)، قیمت ورود و حد ضرر را مشخص کرده و اهداف سود را وارد کنید.</p>
+        </article>
+        <article class="step">
+          <b>03 / EXECUTE</b>
+          <h3 data-fa="بررسی و ثبت سفارش" data-en="Review &amp; Place Order">بررسی و ثبت سفارش</h3>
+          <p data-fa="حجم، اهرم پیشنهادی و کارمزدها را بررسی کنید و با ارقام صرافی خود تطبیق دهید." data-en="Review the calculated notional, recommended leverage, and place your order safely.">حجم، اهرم پیشنهادی و کارمزدها را بررسی کنید و با ارقام صرافی خود تطبیق دهید.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. Section 04: Wallex Crypto Payment & Purchase
+         ========================================================================== -->
+    <section id="purchase" class="purchase">
+      <!-- Crypto Payment & Voluntary Donation Card -->
+      <div class="wallex-card">
+        <div class="wallex-badge" style="background:rgba(14, 203, 129, 0.12);color:var(--success);border-color:var(--success-border);">
+          <i></i><span data-fa="💛 پلتفرم ۱۰۰٪ رایگان · دونیت و حمایت مالی اختیاری" data-en="💛 100% Free Platform · Voluntary Donation">💛 پلتفرم ۱۰۰٪ رایگان · دونیت و حمایت مالی اختیاری</span>
+        </div>
+        <h2 data-fa="حمایت مالی از پایداری سرورها و توسعه MRSIGNALLL" data-en="Support &amp; Donate to MRSIGNALLL">حمایت مالی از پایداری سرورها و توسعه MRSIGNALLL</h2>
+        <p class="sub-lead" data-fa="استفاده از تمام ابزارهای ماشین‌حساب، تارگت‌های چندگانه و اسکریپت‌های معاملاتی کاملاً رایگان است. چنانچه مایل به همیاری در تأمین هزینه‌های سرور، هاستینگ و توسعه قابلیت‌های جدید هستید، می‌توانید مبلغ دلخواه خود را در قالب دونیت ارسال کنید." data-en="All calculators, multi-TP targets and trading scripts are 100% free. If you wish to support server hosting and continuous development of free tools, voluntary donations are welcomed.">استفاده از تمام ابزارهای ماشین‌حساب، تارگت‌های چندگانه و اسکریپت‌های معاملاتی کاملاً رایگان است. چنانچه مایل به همیاری در تأمین هزینه‌های سرور، هاستینگ و توسعه قابلیت‌های جدید هستید، می‌توانید مبلغ دلخواه خود را در قالب دونیت ارسال کنید.</p>
+
+        <!-- Active VIP Subscription / Supporter Card -->
+        <div id="subActiveCard" class="sub-active-card" hidden>
+          <div class="sub-active-header">
+            <strong data-fa="سپاس از حمایت شما 🌹 شما حامی فعال سامانه هستید" data-en="Thank You for Your Support 🌹 You are a Verified Supporter">سپاس از حمایت شما 🌹 شما حامی فعال سامانه هستید</strong>
+            <span class="tag tag-yellow" data-fa="حامی پروژه 💛" data-en="PATRON 💛">حامی پروژه 💛</span>
+          </div>
+          <div class="sub-stats">
+            <div class="sub-stat">
+              <span data-fa="وضعیت اشتراک" data-en="Membership Status">وضعیت اشتراک</span>
+              <b data-fa="دسترسی کامل رایگان + نشان حامی" data-en="Free All Access + Supporter">دسترسی کامل رایگان + نشان حامی</b>
+            </div>
+            <div class="sub-stat">
+              <span data-fa="تأیید تراکنش دونیت" data-en="Donation Status">تأیید تراکنش دونیت</span>
+              <b style="color:var(--success)">✓ ثبت شد</b>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upgrade Steps / Form -->
+        <div id="subFormWrap">
+          <!-- 1. Select Donation Amount -->
+          <label class="field-label" data-fa="۱. مبلغ دلخواه برای دونیت را انتخاب کنید:" data-en="1. Select Voluntary Donation Amount:">۱. مبلغ دلخواه برای دونیت را انتخاب کنید:</label>
+          <div class="plan-grid">
+            <button type="button" class="plan-btn" data-plan="1" aria-pressed="true">
+              <small data-fa="یک فنجان قهوه ☕" data-en="Buy a Coffee ☕">یک فنجان قهوه ☕</small>
+              <strong>1.00 USDT</strong>
+              <small data-fa="حمایت پایه" data-en="Basic Support">حمایت پایه</small>
+            </button>
+            <button type="button" class="plan-btn" data-plan="5" aria-pressed="false">
+              <small data-fa="حامی سرور ⚡" data-en="Server Supporter ⚡">حامی سرور ⚡</small>
+              <strong>5.00 USDT</strong>
+              <small data-fa="کمک به هزینه‌های سرور" data-en="Hosting Support">کمک به هزینه‌های سرور</small>
+            </button>
+            <button type="button" class="plan-btn" data-plan="20" aria-pressed="false">
+              <span class="save-tag" data-fa="حامی طلایی 💎" data-en="Gold Patron 💎">حامی طلایی 💎</span>
+              <strong>20.00 USDT</strong>
+              <small data-fa="توسعه ابزارهای جدید" data-en="Development Booster">توسعه ابزارهای جدید</small>
+            </button>
+          </div>
+
+          <!-- 2. Select Network -->
+          <label class="field-label" data-fa="۲. شبکهٔ فعال واریز تتر (USDT):" data-en="2. Active Deposit Network:">۲. شبکهٔ فعال واریز تتر (USDT):</label>
+          <div class="net-select">
+            <button type="button" class="net-btn" data-net="BSC" aria-pressed="true">
+              <span class="net-title">USDT · BNB Smart Chain (BEP-20)</span>
+              <span class="net-status" data-fa="شبکه فعال · کمترین کارمزد انتقال · حداقل واریز صفر" data-en="Active Network · Minimal fee · Zero min deposit">شبکه فعال · کمترین کارمزد انتقال · حداقل واریز صفر</span>
+            </button>
+          </div>
+
+          <!-- 3. Deposit Info & QR Frame -->
+          <div class="deposit-box">
+            <div class="qr-frame">
+              <img id="walletQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;margin=6&amp;data=0x19b3c81ffe912e995c20cef4db50f289379bd9c7" alt="Wallet QR Code">
+            </div>
+            <div class="deposit-info">
+              <div class="dep-row">
+                <label data-fa="مبلغ دونیت انتخابی:" data-en="Selected Amount:">مبلغ دونیت انتخابی:</label>
+                <code id="depAmountDisplay">1.00 USDT</code>
+                <button type="button" class="btn-copy-mini" id="btnCopyAmount" data-fa="کپی" data-en="Copy">کپی</button>
+              </div>
+              <div class="dep-row">
+                <label data-fa="آدرس ولت واریز:" data-en="Deposit Wallet Address:">آدرس ولت واریز:</label>
+                <code id="depAddressDisplay">0x19b3c81ffe912e995c20cef4db50f289379bd9c7</code>
+                <button type="button" class="btn-copy-mini" id="btnCopyAddress" data-fa="کپی آدرس" data-en="Copy Address">کپی آدرس</button>
+              </div>
+              <div style="font-size:10px;color:var(--text-tertiary)" id="netTipText" data-fa="تتر (USDT) را فقط از شبکه BNB Smart Chain (BEP20) ولت شخصی یا صرافی به آدرس بالا واریز کنید." data-en="Send USDT only via BNB Smart Chain (BEP20) to the address above.">تتر (USDT) را فقط از شبکه BNB Smart Chain (BEP20) ولت شخصی یا صرافی به آدرس بالا واریز کنید.</div>
+            </div>
+          </div>
+
+          <!-- 4. TxHash Verification -->
+          <div class="tx-section">
+            <label for="txHashInput" data-fa="۳. هش تراکنش (TxHash) را برای ثبت در تالار حامیان وارد کنید:" data-en="3. Enter Transaction Hash (TxHash) to register:">۳. هش تراکنش (TxHash) را برای ثبت در تالار حامیان وارد کنید:</label>
+            <div class="tx-input-wrap">
+              <input type="text" id="txHashInput" class="tx-input" placeholder="0x... یا شناسهٔ تراکنش در صرافی / ولت" data-fa-placeholder="0x... یا شناسهٔ تراکنش در صرافی / ولت" data-en-placeholder="0x... or TxID from exchange / wallet" autocomplete="off">
+              <button type="button" class="btn primary" id="btnVerifyTx" data-fa="ثبت و تأیید دونیت" data-en="Submit &amp; Verify">ثبت و تأیید دونیت</button>
+            </div>
+            <div id="verifyAlert" class="verify-alert"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+              <button type="button" class="btn-copy-mini" id="btnSendTgReceipt" data-fa="ارسال فیش و پیام محبت‌آمیز به تلگرام فاندر ↗" data-en="Send Receipt to Founder Telegram ↗">ارسال فیش و پیام محبت‌آمیز به تلگرام فاندر ↗</button>
+              <span style="font-size:10px;color:var(--text-tertiary)" data-fa="پشتیبانی ۲۴ ساعته در تلگرام" data-en="24/7 Telegram Support">پشتیبانی ۲۴ ساعته در تلگرام</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aside Column: Switchable Bitunix Referral & Telegram Community -->
+      <aside class="purchase-aside">
+        <!-- Tab Bar Switcher -->
+        <div class="aside-tab-bar">
+          <button type="button" class="aside-tab-btn active" id="btnTabBitunix" onclick="switchAsideTab('bitunix')">
+            <span class="tab-pulse-dot"></span>
+            <span data-fa="طرح رفرال و ۳۰٪ کش‌بک Bitunix" data-en="Bitunix 30% Fee Cashback">طرح رفرال و ۳۰٪ کش‌بک Bitunix</span>
+            <span class="badge-hot">30% OFF</span>
+          </button>
+          <button type="button" class="aside-tab-btn" id="btnTabTelegram" onclick="switchAsideTab('telegram')">
+            <span data-fa="کانال و پشتیبانی تلگرام" data-en="Telegram Community">کانال و پشتیبانی تلگرام</span>
+          </button>
+        </div>
+
+        <!-- Panel 1: Bitunix X Mr. Signal Exclusive Rewards & Cashback -->
+        <div class="bitunix-card" id="panelBitunix">
+          <!-- Head -->
+          <div class="bitunix-head">
+            <div class="bitunix-branding">
+              <div class="bitunix-logos">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                  <rect width="32" height="32" rx="6" fill="#0B0E11"/>
+                  <path d="M7 16L13 10L19 16L13 22L7 16Z" fill="#0ECB81"/>
+                  <path d="M15 16L21 10L27 16L21 22L15 16Z" fill="#F0B90B"/>
+                </svg>
+                <span class="cross-x">✕</span>
+                <img src="img/logo.jpg" class="cowboy-logo" alt="Mr. Signal">
+              </div>
+              <div class="bitunix-title-group">
+                <h3 class="bitunix-title">Bitunix × Mr. Signal</h3>
+                <span class="sub-tag" data-fa="کمپین انحصاری جوایز معاملاتی و کش‌بک" data-en="Exclusive Trading Rewards &amp; Cashback">کمپین انحصاری جوایز معاملاتی و کش‌بک</span>
+              </div>
+            </div>
+            <div class="bitunix-cashback-badge">
+              <span>★ 30% CASHBACK</span>
+            </div>
+          </div>
+
+          <!-- Embedded Poster Preview Card (Clickable Lightbox Trigger) -->
+          <div class="bitunix-poster-thumb" onclick="openBitunixPosterModal()" title="کلیک برای مشاهده پوستر رسمی / Click to view full poster">
+            <img src="img/bitunix-rewards.jpg?v=2" alt="Bitunix Exclusive Trading Rewards - 30% Cashback">
+            <div class="poster-overlay">
+              <span class="poster-overlay-badge" data-fa="پوستر رسمی کمپین ۳۰٪ کش‌بک" data-en="Official 30% Cashback Campaign Poster">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span data-fa="پوستر کمپین" data-en="Campaign Poster">پوستر کمپین</span>
+              </span>
+              <span class="poster-overlay-btn" data-fa="مشاهده بزرگتر 🔍" data-en="Expand Poster 🔍">مشاهده بزرگتر 🔍</span>
+            </div>
+          </div>
+
+          <!-- Feature Pillars from Official Campaign Poster -->
+          <div class="voucher-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="voucher-card" style="text-align:center;">
+              <div style="font-size:16px;margin-bottom:2px;">⚡</div>
+              <div class="voucher-reward" style="justify-content:center;font-size:11px;color:var(--text-primary);" data-fa="Trade Smarter" data-en="Trade Smarter">Trade Smarter</div>
+              <div class="voucher-dep" style="font-size:9px;margin-top:2px;" data-fa="کاهش هزینه‌های معاملاتی" data-en="Reduced Trading Fees">کاهش هزینه‌های معاملاتی</div>
+            </div>
+            <div class="voucher-card" style="text-align:center;">
+              <div style="font-size:16px;margin-bottom:2px;">📊</div>
+              <div class="voucher-reward" style="justify-content:center;font-size:11px;color:var(--brand-primary);" data-fa="Higher Rewards" data-en="Higher Rewards">Higher Rewards</div>
+              <div class="voucher-dep" style="font-size:9px;margin-top:2px;" data-fa="۳۰٪ کش‌بک مستقیم" data-en="30% Direct Cashback">۳۰٪ کش‌بک مستقیم</div>
+            </div>
+            <div class="voucher-card" style="text-align:center;">
+              <div style="font-size:16px;margin-bottom:2px;">💎</div>
+              <div class="voucher-reward" style="justify-content:center;font-size:11px;color:var(--success);" data-fa="Exclusive" data-en="Exclusive">Exclusive</div>
+              <div class="voucher-dep" style="font-size:9px;margin-top:2px;" data-fa="فرصت‌های انحصاری" data-en="VIP Opportunities">فرصت‌های انحصاری</div>
+            </div>
+          </div>
+
+          <!-- Promo Code Box -->
+          <div class="bitunix-code-box">
+            <div class="code-info">
+              <span class="code-label" data-fa="کد معرف اختصاصی (Promo Code):" data-en="Exclusive Referral Code:">کد معرف اختصاصی (Promo Code):</span>
+              <span class="code-val">gNLc4507</span>
+            </div>
+            <button type="button" class="btn-copy-code" id="btnCopyBitunixCode" onclick="copyBitunixCode('gNLc4507')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span data-fa="کپی کد" data-en="Copy Code">کپی کد</span>
+            </button>
+          </div>
+
+          <!-- Primary CTA Button -->
+          <a href="https://www.bitunix.com/register?vipCode=gNLc4507" target="_blank" rel="noopener noreferrer" class="btn-bitunix-cta">
+            <span data-fa="دریافت ۳۰٪ کش‌بک کارمزد و پاداش‌های معاملاتی در Bitunix ↗" data-en="Claim 30% Fee Cashback &amp; Trading Rewards on Bitunix ↗">دریافت ۳۰٪ کش‌بک کارمزد و پاداش‌های معاملاتی در Bitunix ↗</span>
+          </a>
+
+          <!-- Optional Accordion: Full Persuasive Explanation -->
+          <div class="bitunix-accordion-wrap">
+            <button type="button" class="bitunix-details-trigger" onclick="toggleBitunixDetails()">
+              <span data-fa="💡 چرا ۳۰٪ کش‌بک کارمزد حیاتی است؟ (توضیحات و شفاف‌سازی)" data-en="💡 Why 30% Fee Cashback is Crucial? (Full Transparency)">💡 چرا ۳۰٪ کش‌بک کارمزد حیاتی است؟ (توضیحات و شفاف‌سازی)</span>
+              <span id="bitunixDetailsArrow">▾</span>
+            </button>
+            <div class="bitunix-details-content" id="bitunixDetailsContent">
+              <p data-fa="بیشتر تریدرها وسواس زیادی روی نقاط ورود و خروج دارند، اما قاتل خاموشی را که بی‌سر و صدا سود و سرمایه‌شان (PnL) را تخلیه می‌کند نادیده می‌گیرند: کارمزد معاملات." data-en="Most traders obsess over entries and exits, but completely overlook the silent killer quietly draining their PnL: trading fees.">بیشتر تریدرها وسواس زیادی روی نقاط ورود و خروج دارند، اما قاتل خاموشی را که بی‌سر و صدا سود و سرمایه‌شان (PnL) را تخلیه می‌کند نادیده می‌گیرند: کارمزد معاملات.</p>
+
+              <p data-fa="واقعیت واضح این است: چه مستقیم در صرافی ثبت‌نام کنید و چه با لینک دیگران، صرافی روی هر معامله سهم خود را کسر می‌کند. در طول یک ماه اسکلپ یا سوینگ ترید، این درصدهای کوچک به صدها یا حتی هزاران دلار تبدیل می‌شوند که مستقیماً به جیب صرافی ریخته شده است. به جای هدر رفتن این پول، ما طرح خودکار ۳۰٪ بازگشت کارمزد (Cashback) را ترتیب دادیم. با هر بار معامله، ۳۰٪ از کارمزد پرداختی شما فوراً به ولت‌تان برمی‌گردد." data-en="Here is the plain truth: whether you register raw or use someone’s link, every single exchange charges you a cut on every trade. Over a month of active scalping or swing trading, those small percentages add up to hundreds—sometimes thousands—of dollars handed straight to the exchange. Instead of letting that money disappear, we set up an automatic 30% Fee Cashback deal. Every time you execute a trade, 30% of your paid fees bounce right back into your wallet.">واقعیت واضح این است: چه مستقیم در صرافی ثبت‌نام کنید و چه با لینک دیگران، صرافی روی هر معامله سهم خود را کسر می‌کند. در طول یک ماه اسکلپ یا سوینگ ترید، این درصدهای کوچک به صدها یا حتی هزاران دلار تبدیل می‌شوند که مستقیماً به جیب صرافی ریخته شده است. به جای هدر رفتن این پول، ما طرح خودکار ۳۰٪ بازگشت کارمزد (Cashback) را ترتیب دادیم. با هر بار معامله، ۳۰٪ از کارمزد پرداختی شما فوراً به ولت‌تان برمی‌گردد.</p>
+
+              <ul class="perks-list">
+                <li>
+                  <span>💎</span>
+                  <div>
+                    <strong data-fa="۳۰٪ کش‌بک مستقیم کارمزد:" data-en="30% Direct Fee Cashback:">۳۰٪ کش‌بک مستقیم کارمزد:</strong>
+                    <span data-fa="سرمایه نقدی مستقیماً به حساب معاملاتی شما بازگردانده می‌شود." data-en="Hard capital returned directly to your trading account.">سرمایه نقدی مستقیماً به حساب معاملاتی شما بازگردانده می‌شود.</span>
+                  </div>
+                </li>
+                <li>
+                  <span>⚡</span>
+                  <div>
+                    <strong data-fa="پایین‌ترین نرخ کارمزد پایه:" data-en="Lowest Base Fee Tiers:">پایین‌ترین نرخ کارمزد پایه:</strong>
+                    <span data-fa="دسترسی به کمترین کارمزدهای ممکن معاملاتی صرافی با ثبت‌نام از طریق این لینک." data-en="Access the lowest base trading fee brackets by registering via this link.">دسترسی به کمترین کارمزدهای ممکن معاملاتی صرافی با ثبت‌نام از طریق این لینک.</span>
+                  </div>
+                </li>
+                <li>
+                  <span>🎁</span>
+                  <div>
+                    <strong data-fa="پاداش‌های هفتگی و بونوس‌ها:" data-en="Weekly Bonus Drops:">پاداش‌های هفتگی و بونوس‌ها:</strong>
+                    <span data-fa="توزیع مداوم جوایز و بونوس‌های واریز به تریدرهای فعال." data-en="Regular reward distributions and deposit bonuses directly to active traders.">توزیع مداوم جوایز و بونوس‌های واریز به تریدرهای فعال.</span>
+                  </div>
+                </li>
+                <li>
+                  <span>🏆</span>
+                  <div>
+                    <strong data-fa="مسابقات اختصاصی ترید:" data-en="Exclusive Competitions:">مسابقات اختصاصی ترید:</strong>
+                    <span data-fa="لیگ‌های خصوصی با رقابت‌کنندگان محدودتر و جوایز نقدی واقعی." data-en="Private trading leagues with smaller participant pools and real prize allocations.">لیگ‌های خصوصی با رقابت‌کنندگان محدودتر و جوایز نقدی واقعی.</span>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="transparency-note" data-fa="شفافیت کامل: آیا پلتفرم ما سهم بسیار ناچیزی از کارمزد باقی‌مانده صرافی دریافت می‌کند؟ بله. این سهم خرد مستقیماً صرف سرورها، هاستینگ و توسعه ابزارهای رایگان و حرفه‌ای برای جامعه تریدرها می‌شود. شما کارمزد کمتری می‌پردازید و کش‌بک دریافت می‌کنید." data-en="Full transparency: Does our platform get a tiny fraction of the remaining exchange fee? Yes. That small cut goes straight toward keeping our servers alive, covering domain/hosting costs, and keeping the team caffeinated while we build out free tools for the community. You pay less in fees and get cash back.">شفافیت کامل: آیا پلتفرم ما سهم بسیار ناچیزی از کارمزد باقی‌مانده صرافی دریافت می‌کند؟ بله. این سهم خرد مستقیماً صرف سرورها، هاستینگ و توسعه ابزارهای رایگان و حرفه‌ای برای جامعه تریدرها می‌شود. شما کارمزد کمتری می‌پردازید و کش‌بک دریافت می‌کنید.</div>
+            </div>
+          </div>
+
+          <div class="switch-panel-link" onclick="switchAsideTab('telegram')" data-fa="یا رفتن به کانال تلگرام و ارتباط با فاندر ↵" data-en="Or switch to Telegram Channel &amp; Founder ↵">
+            یا رفتن به کانال تلگرام و ارتباط با فاندر ↵
+          </div>
+        </div>
+
+        <!-- Panel 2: Telegram Community / Founder Card -->
+        <div class="community" id="panelTelegram" style="display:none;">
+          <div class="community-head">
+            <img src="img/logo.jpg" class="community-logo" alt="MRSIGNALLL">
+            <div>
+              <h3>MRSIGNALLL</h3>
+              <a class="handle" href="https://t.me/MRSIGNALLL" target="_blank" rel="noopener noreferrer">@MRSIGNALLL ↗</a>
+            </div>
+          </div>
+
+          <div class="lead" data-fa="سیگنال‌ها و تحلیل‌های برتر بازار کریپتو." data-en="Premier crypto trading signals &amp; market analysis.">سیگنال‌ها و تحلیل‌های برتر بازار کریپتو.</div>
+          <p data-fa="تحلیل‌ها و گزارش‌های زنده را در کانال دنبال کنید. جهت ارتباط مستقیم، پرداخت ریالی یا دریافت تخفیف دوره‌ای با فاندر در تماس باشید." data-en="Follow our Telegram channel for live setups. For direct contact or questions, message the founder.">تحلیل‌ها و گزارش‌های زنده را در کانال دنبال کنید. جهت ارتباط مستقیم، پرداخت ریالی یا دریافت تخفیف دوره‌ای با فاندر در تماس باشید.</p>
+
+          <div class="actions">
+            <a class="btn primary" href="https://t.me/MRSIGNALLL" target="_blank" rel="noopener noreferrer" data-fa="عضویت در کانال ↗" data-en="Join Channel ↗">عضویت در کانال ↗</a>
+            <a class="btn dark" href="https://t.me/the_foundder" target="_blank" rel="noopener noreferrer" data-fa="ارتباط با فاندر (@the_foundder)" data-en="Founder Contact">ارتباط با فاندر (@the_foundder)</a>
+          </div>
+
+          <!-- Official Social Channels Grid -->
+          <div class="official-channels-grid">
+            <a href="https://www.tradingview.com/u/mrsignalll/" target="_blank" rel="noopener noreferrer" class="channel-card tv">
+              <div class="channel-icon-box tv-bg">
+                <svg width="18" height="18" viewBox="0 0 36 28" fill="currentColor">
+                  <path d="M14 22H7V6h7v16zm8-16h-6v22h6V6zm8 7h-6v15h6V13z"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">TradingView</span>
+                <span class="channel-handle">@mrsignalll ↗</span>
+              </div>
+            </a>
+            <a href="https://x.com/Mrsignall" target="_blank" rel="noopener noreferrer" class="channel-card x">
+              <div class="channel-icon-box x-bg">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">X (Twitter)</span>
+                <span class="channel-handle">@Mrsignall ↗</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="switch-panel-link" onclick="switchAsideTab('bitunix')" style="margin-top:6px;margin-bottom:6px;color:var(--brand-primary);" data-fa="★ مشاهده طرح ویژه ۳۰٪ کش‌بک و رفرال Bitunix ↗" data-en="★ View Bitunix 30% Fee Cashback &amp; Rewards ↗">
+            ★ مشاهده طرح ویژه ۳۰٪ کش‌بک و رفرال Bitunix ↗
+          </div>
+
+          <p class="disclaimer" data-fa="شخصاً تحقیق کنید؛ معاملات فیوچرز دارای ریسک است. ماشین‌حساب ابزار تخمین است و سود یا جلوگیری از لیکوئید شدن را تضمین نمی‌کند." data-en="Do your own research. Futures trading carries risk. The calculator is an estimating tool and does not guarantee profit or loss avoidance.">شخصاً تحقیق کنید؛ معاملات فیوچرز دارای ریسک است. ماشین‌حساب ابزار تخمین است و سود یا جلوگیری از لیکوئید شدن را تضمین نمی‌کند.</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ==========================================================================
+         8. Section 05: FAQ Accordion
+         ========================================================================== -->
+    <section class="faq" id="faq">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">05 / GOOD TO KNOW</span>
+          <h2 data-fa="پرسش‌های متداول پیش از استفاده" data-en="Frequently Asked Questions">پرسش‌های متداول پیش از استفاده</h2>
+        </div>
+      </div>
+
+      <details>
+        <summary data-fa="آیا این ماشین‌حساب سیگنال خرید و فروش صادر می‌کند؟" data-en="Does the calculator issue buy and sell signals?">آیا این ماشین‌حساب سیگنال خرید و فروش صادر می‌کند؟</summary>
+        <p data-fa="خیر. ماشین‌حساب یک ابزار مدیریت ریسک و تعیین اندازهٔ پوزیشن (Position Sizing) است و با قیمت‌ها و درصد ریسک ورودی شما سناریو را مدل می‌کند. سیگنال‌ها در کانال تلگرام ارائه می‌شوند." data-en="No. It is a risk management and position sizing tool that models scenarios based on your inputs. Signals are shared in our Telegram channel.">خیر. ماشین‌حساب یک ابزار مدیریت ریسک و تعیین اندازهٔ پوزیشن (Position Sizing) است و با قیمت‌ها و درصد ریسک ورودی شما سناریو را مدل می‌کند. سیگنال‌ها در کانال تلگرام ارائه می‌شوند.</p>
+      </details>
+
+      <details>
+        <summary data-fa="فرمول‌های ریاضی و مدل محاسبه اندازه حجم چیست؟" data-en="What mathematical formulas are used?">فرمول‌های ریاضی و مدل محاسبه اندازه حجم چیست؟</summary>
+        <p data-fa="برای قرارداد خطی با تسویهٔ USDT: بودجهٔ ریسک R، قیمت ورود E، استاپ S، هدف T و نرخ کارمزد هر طرف f است. با لحاظ کارمزد، فرمول حجم به صورت زیر است:" data-en="For linear USDT contracts, R is risk budget, E entry, S stop, T target, and f fee per side:">برای قرارداد خطی با تسویهٔ USDT: بودجهٔ ریسک R، قیمت ورود E، استاپ S، هدف T و نرخ کارمزد هر طرف f است. با لحاظ کارمزد، فرمول حجم به صورت زیر است:</p>
+        <code class="formula">R = balance × risk% / 100
+f = fee% / 100
+q = R / (|E − S| + f × (E + S))
+Notional = q × E
+Stop loss incl. fees = q × (|E − S| + f × (E + S))
+Net P/L = q × direction × (T − E) − q × f × (E + T)
+Initial margin = Notional / Leverage
+Liquidation (long) ≈ E × (1 − 1/L) / (1 − m)
+Liquidation (short) ≈ E × (1 + 1/L) / (1 + m)</code>
+      </details>
+
+      <details>
+        <summary data-fa="چگونه قیمت زنده از بایننس دریافت می‌شود؟" data-en="How are live prices fetched from Binance?">چگونه قیمت زنده از بایننس دریافت می‌شود؟</summary>
+        <p data-fa="با کلیک روی دکمهٔ «دریافت قیمت زنده بایننس»، آخرین نرخ معامله از endpoint رسمی بایننس فیوچرز دریافت شده و به عنوان قیمت ورود جایگذاری می‌گردد." data-en="Clicking the fetch button queries the official Binance Futures REST endpoint and populates the entry price field with a green/red flash animation.">با کلیک روی دکمهٔ «دریافت قیمت زنده بایننس»، آخرین نرخ معامله از endpoint رسمی بایننس فیوچرز دریافت شده و به عنوان قیمت ورود جایگذاری می‌گردد.</p>
+      </details>
+
+      <details>
+        <summary data-fa="شرایط و نحوهٔ فعال‌سازی پریمیوم با پرداخت کریپتو چیست؟" data-en="How does the crypto premium upgrade work?">شرایط و نحوهٔ فعال‌سازی پریمیوم با پرداخت کریپتو چیست؟</summary>
+        <p data-fa="با انتقال مبلغ پلن (ماهانه ۱ دلار) روی شبکه کم‌کارمزد BNB Smart Chain (BEP-20) و ثبت هش تراکنش، اشتراک به صورت خودکار فعال شده و اهداف چندگانه و خروجی کد تریدینگ‌ویو در دسترس قرار می‌گیرند." data-en="Deposit $1/month USDT on BNB Smart Chain (BEP-20), submit the TxHash, and Pro Tools (Multi-TP &amp; TradingView script generation) activate immediately.">با انتقال مبلغ پلن (ماهانه ۱ دلار) روی شبکه کم‌کارمزد BNB Smart Chain (BEP-20) و ثبت هش تراکنش، اشتراک به صورت خودکار فعال شده و اهداف چندگانه و خروجی کد تریدینگ‌ویو در دسترس قرار می‌گیرند.</p>
+      </details>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       9. Footer
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <b>MRSIGNALLL / BINANCE FUTURES RISK CALCULATOR</b>
+        <div>
+          <a href="https://www.tradingview.com/u/mrsignalll/" target="_blank" rel="noopener noreferrer">TradingView ↗</a> ·
+          <a href="https://x.com/Mrsignall" target="_blank" rel="noopener noreferrer">X (Twitter) ↗</a> ·
+          <a href="https://t.me/MRSIGNALLL" target="_blank" rel="noopener noreferrer">@MRSIGNALLL</a> ·
+          <a href="https://t.me/the_foundder" target="_blank" rel="noopener noreferrer">@the_foundder</a>
+        </div>
+      </div>
+      <div data-fa="شخصاً تحقیق کنید؛ مسئولیت سود و زیان با معامله‌گر است. این ابزار توصیهٔ سرمایه‌گذاری نیست و در محیط مرورگر به صورت کلاینت ساید محاسبه می‌گردد." data-en="Do your own research. All calculations run locally in your browser. Not financial advice.">شخصاً تحقیق کنید؛ مسئولیت سود و زیان با معامله‌گر است. این ابزار توصیهٔ سرمایه‌گذاری نیست و در محیط مرورگر به صورت کلاینت ساید محاسبه می‌گردد.</div>
+    </div>
+  </footer>
+
+  <!-- Fixed Mobile CTA -->
+  <div class="mobile-buy">
+    <span data-fa="ماشین‌حساب فیوچرز MRSIGNALLL" data-en="MRSIGNALLL Futures Calculator">ماشین‌حساب فیوچرز MRSIGNALLL</span>
+    <a class="btn primary small" href="#purchase" data-fa="حمایت مالی از پروژه ☕" data-en="Support &amp; Donate ☕">حمایت مالی از پروژه ☕</a>
+  </div>
+
+  <!-- ==========================================================================
+       10. Auth Modal (Telegram Recommended, Email/Password, Web3 Wallet)
+       ========================================================================== -->
+  <div class="modal-overlay" id="authModal" style="display:none;">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeAuthModal()">&times;</button>
+
+      <div class="modal-title-wrap">
+        <h3 class="modal-title">
+          <span data-fa="ورود و مدیریت حساب کاربری" data-en="Account Login &amp; Management">ورود و مدیریت حساب کاربری</span>
+        </h3>
+        <p class="modal-desc" data-fa="روش ورود مورد نظر خود را انتخاب کنید. اطلاعات اشتراک شما همگام‌سازی می‌شود." data-en="Select your preferred login method. Your subscription will be synced across all devices.">روش ورود مورد نظر خود را انتخاب کنید. اطلاعات اشتراک شما همگام‌سازی می‌شود.</p>
+      </div>
+
+      <div id="authAlert" class="auth-alert"></div>
+
+      <!-- 3 Provider Tabs (Telegram is Recommended) -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn tab-recommended active" id="tabBtn_telegram" onclick="switchAuthTab('telegram')">
+          <span class="tab-badge-rec" data-fa="★ پیشنهادی" data-en="★ Recommended">★ پیشنهادی</span>
+          <span data-fa="تلگرام" data-en="Telegram">تلگرام</span>
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabBtn_email" onclick="switchAuthTab('email')">
+          <span data-fa="ایمیل" data-en="Email">ایمیل</span>
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabBtn_wallet" onclick="switchAuthTab('wallet')">
+          <span data-fa="کیف‌پول وب۳" data-en="Web3 Wallet">کیف‌پول وب۳</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Telegram Auth (Recommended) -->
+      <div class="auth-tab-panel active" id="tabPanel_telegram">
+        <div class="telegram-auth-box">
+          <div class="telegram-logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          </div>
+          <h4 style="margin:0 0 6px;color:var(--text-primary);" data-fa="ورود سریع و امن با ربات رسمی تلگرام (@mrsignallo_bot)" data-en="Secure Sign In via Official Telegram Bot (@mrsignallo_bot)">ورود سریع و امن با ربات رسمی تلگرام (@mrsignallo_bot)</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin:0 0 14px;" data-fa="جهت امنیت صددرصدی حساب، ورود به سایت فقط از طریق ربات رسمی انجام می‌شود. روی دکمه زیر کلیک کرده و در تلگرام دکمه Start را بزنید." data-en="For 100% account security, authentication is verified via our official Telegram bot. Click below and tap Start in Telegram.">جهت امنیت صددرصدی حساب، ورود به سایت فقط از طریق ربات رسمی انجام می‌شود. روی دکمه زیر کلیک کرده و در تلگرام دکمه Start را بزنید.</p>
+
+          <!-- Method 1: Bot Connect Button -->
+          <button type="button" class="btn-telegram-connect" id="btnTgBotConnect" onclick="startTelegramBotAuth()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.13 7.19c-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.18 3.35-1.38 3.73-1.39.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            <span data-fa="اتصال امن با ربات تلگرام (@mrsignallo_bot) ↗" data-en="Connect with Telegram Bot (@mrsignallo_bot) ↗">اتصال امن با ربات تلگرام (@mrsignallo_bot) ↗</span>
+          </button>
+
+          <!-- Waiting State for Bot Login -->
+          <div id="tgWaitingBox" style="display:none;background:#101418;border:1px dashed var(--brand-primary);border-radius:var(--radius-sm);padding:14px;margin-top:10px;">
+            <div style="font-size:12px;font-weight:700;color:var(--brand-primary);margin-bottom:4px;" data-fa="⏳ در انتظار تأیید در ربات تلگرام…" data-en="⏳ Waiting for Telegram Bot verification…">⏳ در انتظار تأیید در ربات تلگرام…</div>
+            <p style="font-size:11px;color:var(--text-secondary);margin:0 0 10px;" data-fa="ربات در تب جدید باز شد. لطفاً دکمه Start را در تلگرام بزنید." data-en="Bot opened in new tab. Please press Start in Telegram.">ربات در تب جدید باز شد. لطفاً دکمه Start را در تلگرام بزنید.</p>
+            <button type="button" class="btn small dark" onclick="cancelTelegramBotAuth()" data-fa="انصراف" data-en="Cancel">انصراف</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Email Auth -->
+      <div class="auth-tab-panel" id="tabPanel_email">
+        <div class="auth-form-group" id="emailGroupUsername" style="display:none;">
+          <label data-fa="نام نمایشی:" data-en="Display Name:">نام نمایشی:</label>
+          <input type="text" id="authUsernameInput" class="auth-input" placeholder="نام شما" data-fa-placeholder="نام شما" data-en-placeholder="Your Name">
+        </div>
+        <div class="auth-form-group">
+          <label data-fa="آدرس ایمیل:" data-en="Email Address:">آدرس ایمیل:</label>
+          <input type="email" id="authEmailInput" class="auth-input" placeholder="name@example.com" data-fa-placeholder="name@example.com" data-en-placeholder="name@example.com" dir="ltr" autocomplete="email">
+        </div>
+        <div class="auth-form-group">
+          <label data-fa="رمز عبور:" data-en="Password:">رمز عبور:</label>
+          <input type="password" id="authPwdInput" class="auth-input" placeholder="••••••••" dir="ltr" autocomplete="current-password">
+        </div>
+        <button type="button" class="btn primary" id="btnSubmitEmail" style="width:100%;padding:11px;font-size:13px;" onclick="submitEmailAuth()" data-fa="ورود به حساب کاربری" data-en="Sign In">ورود به حساب کاربری</button>
+
+        <div class="auth-toggle-mode" id="emailToggleText">
+          <span data-fa="حساب کاربری ندارید؟" data-en="No account yet?">حساب کاربری ندارید؟</span>
+          <a onclick="toggleEmailMode('register')" data-fa="ثبت‌نام کنید" data-en="Sign Up">ثبت‌نام کنید</a>
+        </div>
+      </div>
+
+      <!-- Tab 3: Web3 Wallet Auth -->
+      <div class="auth-tab-panel" id="tabPanel_wallet">
+        <div class="wallet-auth-box">
+          <div class="wallet-logo-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          </div>
+          <h4 style="margin:0 0 6px;color:var(--text-primary);" data-fa="اتصال با کیف‌پول وب۳" data-en="Connect Web3 Wallet">اتصال با کیف‌پول وب۳</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin:0 0 16px;" data-fa="با اتصال والت‌هایی نظیر MetaMask بدون نیاز به پسورد وارد حساب شوید." data-en="Sign in directly using MetaMask, TrustWallet or any browser Web3 wallet.">با اتصال والت‌هایی نظیر MetaMask بدون نیاز به پسورد وارد حساب شوید.</p>
+          <button type="button" class="btn primary" style="width:100%;padding:11px;font-size:13px;" onclick="connectWeb3Wallet()" data-fa="اتصال به کیف‌پول (Connect Wallet)" data-en="Connect Web3 Wallet">اتصال به کیف‌پول (Connect Wallet)</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       11. Admin Management Panel Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="adminModal" style="display:none;">
+    <div class="modal-card admin-modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeAdminModal()">&times;</button>
+      <div class="modal-title-wrap">
+        <h3 class="modal-title">
+          <span style="color:var(--brand-primary)">⚡</span>
+          <span data-fa="پنل مدیریت کاربران (Admin Management)" data-en="User Management Panel">پنل مدیریت کاربران (Admin Management)</span>
+        </h3>
+        <p class="modal-desc" data-fa="مشاهده فهرست کاربران پایگاه داده، ارتقای اشتراک و مدیریت نقش‌ها." data-en="View registered users in SQLite database, update roles, and grant VIP access.">مشاهده فهرست کاربران پایگاه داده، ارتقای اشتراک و مدیریت نقش‌ها.</p>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th data-fa="نام کاربر" data-en="Username">نام کاربر</th>
+              <th data-fa="شناسه / ایمیل / ولت" data-en="Identifier">شناسه / ایمیل / ولت</th>
+              <th data-fa="روش ورود" data-en="Provider">روش ورود</th>
+              <th data-fa="نقش فعلی" data-en="Role">نقش فعلی</th>
+              <th data-fa="روزهای باقی‌مانده" data-en="Days Left">روزهای باقی‌مانده</th>
+              <th data-fa="عملیات مدیریت" data-en="Actions">عملیات مدیریت</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       12. Bitunix Rewards Poster Lightbox Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="bitunixPosterModal" style="display:none;" onclick="if(event.target===this)closeBitunixPosterModal()">
+    <div class="modal-card poster-modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeBitunixPosterModal()">&times;</button>
+      <div class="modal-title-wrap" style="margin-bottom:8px;">
+        <h3 class="modal-title">
+          <span style="color:var(--success)">★</span>
+          <span>Bitunix × Mr. Signal Exclusive Rewards</span>
+        </h3>
+        <p class="modal-desc" data-fa="پوستر رسمی کمپین، پاداش‌های واریز و ۳۰٪ کش‌بک کارمزد" data-en="Official campaign poster, deposit vouchers and 30% fee cashback">پوستر رسمی کمپین، پاداش‌های واریز و ۳۰٪ کش‌بک کارمزد</p>
+      </div>
+      <div class="poster-modal-img-wrap">
+        <img src="img/bitunix-rewards.jpg?v=2" alt="Bitunix X Mr. Signal Exclusive Trading Rewards Poster" class="poster-modal-img">
+      </div>
+      <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:4px;">
+        <div style="font-size:12px;font-family:var(--font-mono);color:var(--text-secondary);">
+          Promo Code: <strong style="color:var(--brand-primary);letter-spacing:1px;">gNLc4507</strong>
+        </div>
+        <a href="https://www.bitunix.com/register?vipCode=gNLc4507" target="_blank" rel="noopener noreferrer" class="btn primary small" data-fa="ثبت‌نام و دریافت ۳۰٪ کش‌بک ↗" data-en="Register &amp; Claim 30% Cashback ↗">
+          ثبت‌نام و دریافت ۳۰٪ کش‌بک ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       13. Add Custom Coin Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="addCoinModal" style="display:none;" onclick="if(event.target===this)closeAddCoinModal()">
+    <div class="modal-card add-coin-modal-card">
+      <button type="button" class="modal-close-btn" onclick="closeAddCoinModal()">&times;</button>
+      <div class="modal-title-wrap">
+        <h3 class="modal-title">
+          <span style="color:var(--brand-primary)">+</span>
+          <span data-fa="افزودن ارز دلخواه جدید" data-en="Add Custom Cryptocurrency">افزودن ارز دلخواه جدید</span>
+        </h3>
+        <p class="modal-desc" data-fa="نماد ارز مورد نظر را وارد کنید تا قیمت زنده دریافت شده و به لیست افزوده شود." data-en="Enter the cryptocurrency symbol to fetch live price and add to your active coin list.">نماد ارز مورد نظر را وارد کنید تا قیمت زنده دریافت شده و به لیست افزوده شود.</p>
+      </div>
+
+      <div class="auth-form-group">
+        <label data-fa="نماد ارز (Symbol):" data-en="Coin Symbol:">نماد ارز (Symbol):</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="newCoinInput" class="auth-input" placeholder="مثال: TON, AVAX, NEAR, LINK, SHIB" dir="ltr" style="text-transform:uppercase;" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();submitAddCoin();}">
+          <button type="button" class="btn primary" onclick="submitAddCoin()" style="white-space:nowrap;" data-fa="افزودن و دریافت قیمت" data-en="Add &amp; Fetch">افزودن و دریافت قیمت</button>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--text-secondary);margin-top:14px;" data-fa="پیشنهادهای محبوب:" data-en="Popular suggestions:">پیشنهادهای محبوب:</div>
+      <div class="add-coin-suggestions">
+        <button type="button" onclick="quickAddCoin('TON')">TON</button>
+        <button type="button" onclick="quickAddCoin('AVAX')">AVAX</button>
+        <button type="button" onclick="quickAddCoin('NEAR')">NEAR</button>
+        <button type="button" onclick="quickAddCoin('LINK')">LINK</button>
+        <button type="button" onclick="quickAddCoin('SHIB')">SHIB</button>
+        <button type="button" onclick="quickAddCoin('APT')">APT</button>
+        <button type="button" onclick="quickAddCoin('OP')">OP</button>
+        <button type="button" onclick="quickAddCoin('ARB')">ARB</button>
+        <button type="button" onclick="quickAddCoin('FET')">FET</button>
+        <button type="button" onclick="quickAddCoin('RENDER')">RENDER</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast" class="toast" role="status"></div>
+
+  <noscript>
+    <p style="padding:30px;text-align:center">لطفاً JavaScript مرورگر را برای استفاده از ماشین‌حساب فعال کنید. / Enable JavaScript to run the calculator.</p>
+  </noscript>
+
+  <!-- Modular Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/calculator.js?v=2"></script>
+  <script src="js/market.js?v=3"></script>
+  <script src="js/pro-tools.js?v=2"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/wallex.js?v=4"></script>
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>

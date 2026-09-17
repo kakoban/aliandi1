@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Binance Components: Features, Steps, FAQ, and Notifications
+   ========================================================================== */
+
+/* ==========================================================================
+   Features Grid (02 / BUILT FOR YOUR WORKFLOW)
+   ========================================================================== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.feature {
+  padding: 22px 18px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.feature:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.feature .num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-primary);
+  background: var(--brand-primary-bg);
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(240, 185, 11, 0.28);
+}
+
+.feature h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 16px 0 8px;
+}
+
+.feature p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Steps Section (03 / FROM PLAN TO NUMBERS)
+   ========================================================================== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--brand-primary);
+}
+
+.step b {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: 1px;
+}
+
+.step h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 10px 0 6px;
+}
+
+.step p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+.faq {
+  max-width: 900px;
+  margin: 0 auto 56px;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 16px 0;
+  transition: background-color var(--transition-fast);
+}
+
+.faq details:first-of-type {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.faq summary {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  font-size: 18px;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--brand-primary);
+  margin-inline-start: 12px;
+  transition: transform var(--transition-fast);
+}
+
+.faq details[open] summary::after {
+  content: "−";
+  transform: rotate(180deg);
+}
+
+.faq details p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 12px 0 6px;
+  line-height: 1.7;
+}
+
+.formula {
+  display: block;
+  direction: ltr;
+  overflow-x: auto;
+  white-space: pre;
+  text-align: left;
+  background: #121519;
+  border: 1px solid var(--border-subtle);
+  color: var(--brand-primary);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 14px 0;
+}
+
+/* ==========================================================================
+   Toast Notification & Utilities
+   ========================================================================== */
+.toast {
+  position: fixed;
+  inset-inline: 24px;
+  bottom: 24px;
+  z-index: 200;
+  max-width: 440px;
+  margin: auto;
+  background: #1E2329;
+  color: var(--text-primary);
+  text-align: center;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--brand-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.toast:empty {
+  display: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 1000px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}

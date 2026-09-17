@@ -1,0 +1,699 @@
+/* ==========================================================================
+   Binance-Style Design Tokens & Core Theme
+   MRSIGNALLL Position Calculator & Crypto Exchange UI
+   ========================================================================== */
+
+:root {
+  /* 1. Color System */
+  --brand-primary: #F0B90B;        /* Primary accent - Binance yellow CTAs & active states */
+  --brand-primary-alt: #FCD535;    /* Lighter yellow for hover states */
+  --brand-primary-bg: rgba(240, 185, 11, 0.12);
+
+  --bg-base: #0B0E11;              /* App background (dark theme, near-black) */
+  --bg-surface: #1E2329;           /* Card / panel / table-row surface ("Shark") */
+  --bg-surface-alt: #2B3139;       /* Elevated surface (modals, dropdowns, hover rows) */
+  --bg-surface-hover: #262B33;     /* Subtle row hover */
+  --bg-input: #13171B;             /* Input field surface */
+
+  --border-subtle: #2B3139;        /* Hairline dividers between rows/panels */
+  --border-strong: #474D57;        /* Form borders, active borders */
+  --border-focus: #F0B90B;
+
+  --text-primary: #FFFFFF;         /* Primary high-contrast text on dark surfaces */
+  --text-primary-soft: #EAECEF;
+  --text-secondary: #848E9C;       /* Secondary/muted labels, timestamps, helper text */
+  --text-tertiary: #5E6673;        /* Faint labels / placeholders */
+
+  --success: #0ECB81;              /* Gains, "buy" side, positive % change */
+  --success-bg: rgba(14, 203, 129, 0.12);
+  --success-border: rgba(14, 203, 129, 0.28);
+
+  --danger: #F6465D;               /* Losses, "sell" side, negative % change */
+  --danger-bg: rgba(246, 70, 93, 0.12);
+  --danger-border: rgba(246, 70, 93, 0.28);
+
+  --warning: #F0B90B;
+  --warning-bg: rgba(240, 185, 11, 0.12);
+  --warning-border: rgba(240, 185, 11, 0.3);
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Typography & Tabular Numerals */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Vazirmatn", "Tahoma", sans-serif;
+  --font-mono: "SF Mono", "Roboto Mono", "Cascadia Code", "Consolas", monospace;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Base Reset & Typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --card-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+  --modal-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+}
+
+/* ==========================================================================
+   Binance-Style Light Theme System
+   ========================================================================== */
+:root[data-theme="light"],
+html[data-theme="light"],
+body[data-theme="light"],
+[data-theme="light"] {
+  --bg-base: #FAFAFA;              /* Light app background */
+  --bg-surface: #FFFFFF;           /* Card / panel surface */
+  --bg-surface-alt: #F0F2F5;       /* Elevated surface */
+  --bg-surface-hover: #F5F7FA;     /* Hover row */
+  --bg-input: #FFFFFF;             /* Input field */
+
+  --border-subtle: #EAECEF;        /* Hairline dividers */
+  --border-strong: #D0D5DD;        /* Form borders */
+  --border-focus: #F0B90B;
+
+  --text-primary: #181A20;         /* Primary crisp text */
+  --text-primary-soft: #2B313A;
+  --text-secondary: #707A8A;       /* Secondary labels */
+  --text-tertiary: #929AA5;
+
+  --brand-primary: #F0B90B;
+  --brand-primary-alt: #D89800;
+  --brand-primary-bg: rgba(240, 185, 11, 0.14);
+
+  --success: #03A66D;
+  --success-bg: rgba(3, 166, 109, 0.1);
+  --success-border: rgba(3, 166, 109, 0.28);
+
+  --danger: #CF304A;
+  --danger-bg: rgba(207, 48, 74, 0.1);
+  --danger-border: rgba(207, 48, 74, 0.28);
+
+  --warning: #D9822B;
+  --warning-bg: rgba(217, 130, 43, 0.1);
+  --warning-border: rgba(217, 130, 43, 0.3);
+
+  --card-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  --modal-shadow: 0 20px 48px rgba(0, 0, 0, 0.16);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  background-color: var(--bg-base);
+  color: var(--text-primary-soft);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[lang="fa"] {
+  direction: rtl;
+  font-family: "Vazirmatn", Tahoma, var(--font-sans);
+  line-height: 1.8;
+}
+
+html[lang="en"] {
+  direction: ltr;
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary-soft);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tabular Numerals Requirement: digits never jitter */
+.tabular,
+[data-result],
+.price-value,
+.stat-value,
+.code-val,
+.trade-lines,
+.multitp-col span,
+input[type="number"],
+input[inputmode="decimal"],
+input[inputmode="numeric"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Binance Button System
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary Button: Solid Yellow Fill, Dark Text for maximum contrast */
+.btn-primary,
+.btn.primary {
+  background-color: var(--brand-primary);
+  color: #1E2329 !important; /* Dark text for contrast */
+  font-weight: 700;
+}
+
+.btn-primary:hover,
+.btn.primary:hover {
+  background-color: var(--brand-primary-alt);
+  color: #13171B !important;
+}
+
+/* Secondary / Dark Button */
+.btn-secondary,
+.btn.dark {
+  background-color: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-secondary:hover,
+.btn.dark:hover {
+  background-color: #363D47;
+  border-color: #5E6673;
+}
+
+/* Outline Ghost */
+.btn-outline,
+.btn:not(.primary):not(.dark):not(.buy):not(.sell) {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-outline:hover,
+.btn:not(.primary):not(.dark):not(.buy):not(.sell):hover {
+  background-color: var(--bg-surface-alt);
+  border-color: var(--border-strong);
+}
+
+/* Small Button */
+.btn.small {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: var(--radius-xs);
+}
+
+/* Buy Button (Long) - Binance Green */
+.btn-buy,
+.segmented button.buy[aria-pressed="true"],
+.segmented button#long[aria-pressed="true"] {
+  background-color: var(--success) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  border-color: var(--success) !important;
+  box-shadow: 0 2px 10px rgba(14, 203, 129, 0.28);
+}
+
+/* Sell Button (Short) - Binance Red */
+.btn-sell,
+.segmented button.sell[aria-pressed="true"],
+.segmented button#short[aria-pressed="true"] {
+  background-color: var(--danger) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  border-color: var(--danger) !important;
+  box-shadow: 0 2px 10px rgba(246, 70, 93, 0.28);
+}
+
+/* ==========================================================================
+   Binance Semantic Color Tags, Chips & Badges
+   ========================================================================== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-surface-alt);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.tag-yellow {
+  background: var(--brand-primary-bg);
+  color: var(--brand-primary);
+  border-color: rgba(240, 185, 11, 0.28);
+}
+
+.tag-green, .tag-success {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success-border);
+}
+
+.tag-red, .tag-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: var(--danger-border);
+}
+
+/* Semantic Gains / Loss with mandatory ▲ / ▼ glyphs */
+.good, .val-gain {
+  color: var(--success) !important;
+}
+
+.bad, .val-loss {
+  color: var(--danger) !important;
+}
+
+/* Price Flash Animation for Binance Ticker Tick */
+.price-flash-up {
+  animation: flashGreen 0.7s ease-out;
+}
+
+.price-flash-down {
+  animation: flashRed 0.7s ease-out;
+}
+
+@keyframes flashGreen {
+  0% { background-color: rgba(14, 203, 129, 0.4); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+  0% { background-color: rgba(246, 70, 93, 0.4); }
+  100% { background-color: transparent; }
+}
+
+/* Skeleton Loading State (no bouncy spinners) */
+.skeleton {
+  background: linear-gradient(90deg, #1E2329 25%, #2B3139 50%, #1E2329 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+  border-radius: var(--radius-xs);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ==========================================================================
+   Frontend Polish & Micro-Animations (taste-skill & frontend-design)
+   ========================================================================== */
+
+/* Shimmer Sheen on High-Value Primary CTA Buttons */
+.btn.primary {
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn.primary::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.32) 50%, transparent 70%);
+  transform: translateX(-120%) rotate(25deg);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn.primary:hover::after {
+  transform: translateX(120%) rotate(25deg);
+}
+
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(240, 185, 11, 0.35);
+}
+
+.btn.dark:hover {
+  transform: translateY(-1px);
+}
+
+/* Fluid Hover Lifts on Interactive Cards */
+.feature, .step, .metric, .terminal, .wallex-card, .community, .bitunix-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.25s ease;
+}
+
+.feature:hover, .step:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow);
+}
+
+/* Pulse Animation for Live Ticker and Badges */
+.pulse-live {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+  animation: pulseLiveAnim 1.8s infinite;
+}
+
+@keyframes pulseLiveAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+/* Result Calculation Flash Pulse */
+.result-calc-pulse {
+  animation: resultPulseAnim 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes resultPulseAnim {
+  0% { transform: scale(0.98); opacity: 0.85; }
+  50% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   Theme Toggle Button (Sun / Moon)
+   ========================================================================== */
+.btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.btn-theme-toggle:hover {
+  background: var(--bg-surface-alt);
+  border-color: var(--border-strong);
+  color: var(--brand-primary);
+  transform: translateY(-1px);
+}
+
+.btn-theme-toggle:active {
+  transform: translateY(1px) scale(0.95);
+}
+
+.theme-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+}
+
+/* Dark mode (default): show Sun (click to turn light), hide Moon */
+:root:not([data-theme="light"]) .theme-icon-sun {
+  display: block;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+:root:not([data-theme="light"]) .theme-icon-moon {
+  display: none;
+  transform: rotate(-90deg) scale(0.4);
+  opacity: 0;
+}
+
+/* Light mode: show Moon (click to turn dark), hide Sun */
+html[data-theme="light"] .theme-icon-sun {
+  display: none;
+  transform: rotate(90deg) scale(0.4);
+  opacity: 0;
+}
+
+html[data-theme="light"] .theme-icon-moon {
+  display: block;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  color: #181A20;
+}
+
+/* ==========================================================================
+   Binance Light Theme Comprehensive Overrides
+   ========================================================================== */
+html[data-theme="light"] .nav {
+  background-color: rgba(255, 255, 255, 0.94);
+  border-bottom-color: var(--border-subtle);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+html[data-theme="light"] .market-strip {
+  background-color: #F0F2F5;
+  border-bottom-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .ticker-item:hover {
+  background-color: #E4E7EB;
+}
+
+html[data-theme="light"] .calculator,
+html[data-theme="light"] .wallex-card,
+html[data-theme="light"] .community,
+html[data-theme="light"] .step,
+html[data-theme="light"] .feature,
+html[data-theme="light"] .terminal {
+  background-color: var(--bg-surface);
+  border-color: var(--border-subtle);
+  box-shadow: var(--card-shadow);
+}
+
+html[data-theme="light"] .result {
+  background-color: #F8F9FA;
+  border-inline-start-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .segmented {
+  background-color: #EDF0F3;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .segmented button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"] .chips button,
+html[data-theme="light"] .quick button,
+html[data-theme="light"] .result-main,
+html[data-theme="light"] .metric,
+html[data-theme="light"] .status {
+  background-color: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .field input,
+html[data-theme="light"] .field select {
+  background-color: #FFFFFF;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] .field input:focus,
+html[data-theme="light"] .field select:focus {
+  background-color: #FFFFFF;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(240, 185, 11, 0.2);
+}
+
+html[data-theme="light"] .formula {
+  background: #F4F6F8;
+  border-color: var(--border-subtle);
+  color: #B26A00;
+}
+
+html[data-theme="light"] .toast {
+  background: #FFFFFF;
+  color: #181A20;
+  border-color: var(--brand-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="light"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+html[data-theme="light"] .modal-card {
+  background: #FFFFFF;
+  border-color: var(--border-subtle);
+  box-shadow: var(--modal-shadow);
+}
+
+html[data-theme="light"] .auth-tabs {
+  background: #F0F2F5;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .auth-input {
+  background: #FFFFFF;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] .telegram-auth-box,
+html[data-theme="light"] .wallet-auth-box {
+  background: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .user-dropdown {
+  background: #FFFFFF;
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+
+html[data-theme="light"] .dropdown-header {
+  background: #F8F9FA;
+}
+
+html[data-theme="light"] .lang-dropdown-menu {
+  background: #FFFFFF;
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+html[data-theme="light"] .net-btn {
+  background: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .deposit-box,
+html[data-theme="light"] .sub-stat {
+  background: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .dep-row {
+  background: #FFFFFF;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .aside-tab-bar {
+  background: #EDF0F3;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .aside-tab-btn.active {
+  background: #FFFFFF;
+  color: #B26A00;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .bitunix-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 100%);
+  box-shadow: var(--card-shadow);
+}
+
+html[data-theme="light"] .bitunix-logos {
+  background: #F0F2F5;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .voucher-card {
+  background: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .bitunix-code-box {
+  background: #F0FAF5;
+  border-color: #03A66D;
+}
+
+html[data-theme="light"] .bitunix-code-box .code-val {
+  color: #03A66D;
+}
+
+html[data-theme="light"] .bitunix-details-trigger,
+html[data-theme="light"] .bitunix-details-content {
+  background: #F8F9FA;
+  border-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .poster-modal-card {
+  background: #FFFFFF;
+}
+
+html[data-theme="light"] .mobile-buy {
+  background: rgba(255, 255, 255, 0.95);
+  border-top-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .footer {
+  background: #F0F2F5;
+  border-top-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .admin-table th {
+  background: #F8F9FA;
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .admin-table td {
+  border-bottom-color: var(--border-subtle);
+}
+
+html[data-theme="light"] .skeleton {
+  background: linear-gradient(90deg, #F0F2F5 25%, #E4E7EB 50%, #F0F2F5 75%);
+  background-size: 200% 100%;
+}

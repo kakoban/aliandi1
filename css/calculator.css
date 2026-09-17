@@ -1,0 +1,542 @@
+/* ==========================================================================
+   Binance-Style Calculator & Results Component Styles
+   ========================================================================== */
+
+.calculator {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+}
+
+.inputs {
+  padding: 24px;
+}
+
+.result {
+  padding: 24px;
+  background-color: #171B20;
+  border-inline-start: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   Long / Short Segmented Buttons (Binance Buy/Sell Convention)
+   ========================================================================== */
+.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background-color: #12161A;
+  padding: 4px;
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+  border: 1px solid var(--border-subtle);
+}
+
+.segmented button {
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.segmented button:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Coin Selector Chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+  direction: ltr;
+}
+
+.chips button {
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--radius-xs);
+  background-color: #12161A;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.chips button:hover {
+  background-color: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.chips button[aria-pressed="true"] {
+  background-color: var(--brand-primary-bg);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
+.chips button.btn-add-coin {
+  background-color: rgba(240, 185, 11, 0.08);
+  border: 1px dashed var(--brand-primary);
+  color: var(--brand-primary);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.chips button.btn-add-coin:hover {
+  background-color: var(--brand-primary);
+  color: #1E2329;
+}
+
+.chips button.custom-coin {
+  position: relative;
+  padding-inline-end: 22px;
+}
+
+.chips .remove-coin-btn {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 4px;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.chips .remove-coin-btn:hover {
+  background: var(--danger);
+  color: #FFFFFF;
+}
+
+.add-coin-modal-card {
+  max-width: 440px;
+}
+
+.add-coin-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.add-coin-suggestions button {
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 5px 9px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-coin-suggestions button:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background: var(--brand-primary-bg);
+}
+
+/* Quote Search & Fetch Row */
+.quote-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.quote-row .field {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.quote-row button {
+  height: 40px;
+  padding: 0 14px;
+}
+
+/* Form Fields & Inputs */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  margin-bottom: 14px;
+  min-width: 0;
+}
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-input);
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: 14px;
+  height: 40px;
+  direction: ltr;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.field input:focus,
+.field select:focus {
+  background-color: #151A1F;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 1px var(--brand-primary);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--danger);
+  background-color: rgba(246, 70, 93, 0.08);
+}
+
+.field select {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.field select option {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.field small {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+/* Status text below quote fetch */
+.status {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  background-color: #12161A;
+  border-radius: var(--radius-xs);
+  border-inline-start: 3px solid var(--brand-primary);
+}
+
+/* Quick Stop Distance Buttons */
+.quick {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -4px 0 14px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.quick button {
+  background-color: #12161A;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.quick button:hover {
+  background-color: var(--bg-surface-alt);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+/* Checkbox */
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 10px 0 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check input[type="checkbox"] {
+  accent-color: var(--brand-primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Advanced Disclosure */
+.advanced {
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.advanced summary {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  cursor: pointer;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+.advanced summary:hover {
+  color: var(--brand-primary-alt);
+}
+
+/* ==========================================================================
+   Calculator Results Panel
+   ========================================================================== */
+.result-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.result-badge.long {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+}
+
+.result-badge.short {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+}
+
+/* Result Main Notional Card */
+.result-main {
+  background-color: #121519;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--brand-primary);
+}
+
+.result-main label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.result-main strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--brand-primary);
+  direction: ltr;
+  text-align: start;
+  line-height: 1.2;
+  margin: 4px 0 2px;
+  overflow-wrap: anywhere;
+}
+
+.result-main small {
+  display: block;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  direction: ltr;
+  text-align: start;
+}
+
+/* Metrics Grid (2 Tiles) */
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric {
+  background-color: #121519;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.metric span {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.metric strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  margin-top: 4px;
+  direction: ltr;
+  text-align: start;
+}
+
+/* Dense Data Rows */
+.rows {
+  margin: 4px 0 16px;
+}
+
+.rows div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 9px 4px;
+  font-size: 12px;
+  transition: background-color var(--transition-fast);
+}
+
+.rows div:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.rows dt {
+  color: var(--text-secondary);
+  font-size: 12px;
+  max-width: 60%;
+}
+
+.rows dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-align: end;
+  direction: ltr;
+  color: var(--text-primary);
+}
+
+/* Alerts */
+.alert {
+  font-size: 11px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.alert.warning,
+#calcWarning {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid var(--warning-border);
+}
+
+.alert.error,
+#error {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+}
+
+.result .note {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.result .btn {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .calculator {
+    grid-template-columns: 1fr;
+  }
+  .result {
+    border-inline-start: 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+}
