@@ -91,7 +91,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._set_cors_headers(403)
                 self.wfile.write(json.dumps({
                     "success": False,
-                    "message": "دسترسی غیرمجاز؛ فقط مدیر سیستم مجاز است / Admin access required"
+                    "message": "Access denied. Admin access required."
                 }, ensure_ascii=False).encode("utf-8"))
                 return
 
@@ -115,7 +115,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self._set_cors_headers(403)
                     self.wfile.write(json.dumps({
                         "success": False,
-                        "message": "دسترسی غیرمجاز / Admin only"
+                        "message": "Access denied. Admin only."
                     }, ensure_ascii=False).encode("utf-8"))
                     return
                 path = "/v1/account/balances" if endpoint == "/balances" else "/v1/account/profile"
@@ -162,7 +162,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
             self._set_cors_headers(403)
             self.wfile.write(json.dumps({
                 "success": False,
-                "message": "ورود دستی غیرفعال است. جهت امنیت حساب، لطفاً از دکمه اتصال با ربات رسمی تلگرام استفاده کنید / Direct input disabled. Use official Telegram bot."
+                "message": "Direct input disabled. Use official Telegram bot."
             }, ensure_ascii=False).encode("utf-8"))
             return
 
@@ -175,11 +175,11 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
 
                 if not email or "@" not in email:
                     self._set_cors_headers(400)
-                    self.wfile.write(json.dumps({"success": False, "message": "ایمیل معتبر وارد کنید / Invalid email"}, ensure_ascii=False).encode("utf-8"))
+                    self.wfile.write(json.dumps({"success": False, "message": "Invalid email address."}, ensure_ascii=False).encode("utf-8"))
                     return
                 if not password or len(password) < 6:
                     self._set_cors_headers(400)
-                    self.wfile.write(json.dumps({"success": False, "message": "رمز عبور حداقل ۶ کاراکتر باشد / Password min 6 chars"}, ensure_ascii=False).encode("utf-8"))
+                    self.wfile.write(json.dumps({"success": False, "message": "Password must be at least 6 characters."}, ensure_ascii=False).encode("utf-8"))
                     return
 
                 token, user = db.register_email(username, email, password)
@@ -188,7 +188,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     "success": True,
                     "token": token,
                     "user": user,
-                    "message": "ثبت‌نام با موفقیت انجام شد / Registration successful"
+                    "message": "Registration successful."
                 }, ensure_ascii=False).encode("utf-8"))
             except ValueError as ve:
                 self._set_cors_headers(400)
@@ -206,7 +206,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
 
                 if not email or not password:
                     self._set_cors_headers(400)
-                    self.wfile.write(json.dumps({"success": False, "message": "ایمیل و رمز عبور را وارد کنید / Enter email and password"}, ensure_ascii=False).encode("utf-8"))
+                    self.wfile.write(json.dumps({"success": False, "message": "Please enter your email and password."}, ensure_ascii=False).encode("utf-8"))
                     return
 
                 token, user = db.login_email(email, password)
@@ -215,7 +215,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     "success": True,
                     "token": token,
                     "user": user,
-                    "message": "ورود موفقیت‌آمیز بود / Login successful"
+                    "message": "Login successful."
                 }, ensure_ascii=False).encode("utf-8"))
             except ValueError as ve:
                 self._set_cors_headers(401)
@@ -235,7 +235,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     "success": True,
                     "token": token,
                     "user": user,
-                    "message": "اتصال کیف‌پول موفقیت‌آمیز بود / Wallet connected"
+                    "message": "Wallet connected successfully."
                 }, ensure_ascii=False).encode("utf-8"))
             except ValueError as ve:
                 self._set_cors_headers(400)
@@ -259,7 +259,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
             current_user = self._get_current_user()
             if not current_user or current_user.get("role") not in ["admin", "founder"]:
                 self._set_cors_headers(403)
-                self.wfile.write(json.dumps({"success": False, "message": "دسترسی غیرمجاز / Admin only"}, ensure_ascii=False).encode("utf-8"))
+                self.wfile.write(json.dumps({"success": False, "message": "Access denied. Admin only."}, ensure_ascii=False).encode("utf-8"))
                 return
 
             try:
@@ -271,7 +271,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self._set_cors_headers(200)
                 self.wfile.write(json.dumps({
                     "success": True,
-                    "message": "نقش کاربر به‌روزرسانی شد / Role updated"
+                    "message": "Role updated successfully."
                 }, ensure_ascii=False).encode("utf-8"))
             except Exception as e:
                 self._set_cors_headers(400)
@@ -289,7 +289,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self._set_cors_headers(400)
                     self.wfile.write(json.dumps({
                         "success": False,
-                        "message": "شناسه تراکنش نامعتبر است / Invalid TxHash"
+                        "message": "Invalid transaction hash (TxHash)."
                     }, ensure_ascii=False).encode("utf-8"))
                     return
 
@@ -309,7 +309,7 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                     updated_user = None
 
                 # Admin notification for donation
-                user_name = updated_user.get('username') if updated_user else 'کاربر مهمان'
+                user_name = updated_user.get('username') if updated_user else 'Guest Trader'
                 deposit_alert = (
                     f"❤️ <b>New Voluntary Donation Received!</b>\n"
                     f"• Supporter: <b>{user_name}</b>\n"

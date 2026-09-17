@@ -193,10 +193,10 @@ def auth_telegram(telegram_id=None, username=None, display_name=None):
         user_id = user['id']
         lifetime_ms = now_ms + (100 * 365 * 24 * 60 * 60 * 1000)
         if is_founder and user['role'] != 'founder':
-            cursor.execute("UPDATE users SET role = 'founder', plan = 'lifetime', subscription_expires_at = ?, username = 'فاندر سامانه (MRSIGNALLL)', updated_at = ? WHERE id = ?", (lifetime_ms, now_ms, user_id))
+            cursor.execute("UPDATE users SET role = 'founder', plan = 'lifetime', subscription_expires_at = ?, username = 'MRSIGNALLL Founder (@the_foundder)', updated_at = ? WHERE id = ?", (lifetime_ms, now_ms, user_id))
             conn.commit()
         elif is_admin and user['role'] != 'admin':
-            cursor.execute("UPDATE users SET role = 'admin', plan = 'lifetime', subscription_expires_at = ?, username = 'ادمین سیستم (@Havaeiop)', updated_at = ? WHERE id = ?", (lifetime_ms, now_ms, user_id))
+            cursor.execute("UPDATE users SET role = 'admin', plan = 'lifetime', subscription_expires_at = ?, username = 'System Admin (@Havaeiop)', updated_at = ? WHERE id = ?", (lifetime_ms, now_ms, user_id))
             conn.commit()
     else:
         # Create new user
@@ -238,7 +238,7 @@ def register_email(username, email, password):
     cursor.execute("SELECT id FROM users WHERE LOWER(email) = ?", (clean_email,))
     if cursor.fetchone():
         conn.close()
-        raise ValueError("این ایمیل قبلاً ثبت‌نام شده است / Email already registered")
+        raise ValueError("Email already registered")
 
     pwd_hash = hash_password(password)
 
@@ -263,14 +263,14 @@ def login_email(email, password):
     conn.close()
 
     if not user or not verify_password(user['password_hash'], password):
-        raise ValueError("ایمیل یا رمز عبور اشتباه است / Invalid email or password")
+        raise ValueError("Invalid email or password")
 
     token = create_session(user['id'])
     return token, get_user_by_session(token)
 
 def auth_wallet(wallet_address):
     if not wallet_address or len(wallet_address) < 20:
-        raise ValueError("آدرس کیف‌پول نامعتبر است / Invalid wallet address")
+        raise ValueError("Invalid wallet address")
 
     conn = get_db()
     cursor = conn.cursor()
@@ -339,7 +339,7 @@ def admin_get_users(admin_user_id):
     req_user = cursor.fetchone()
     if not req_user or req_user['role'] not in ['admin', 'founder']:
         conn.close()
-        raise PermissionError("دسترسی غیرمجاز؛ فقط مدیر سیستم دسترسی دارد / Admin access required")
+        raise PermissionError("Access denied. Admin access required.")
 
     cursor.execute('''
     SELECT id, username, email, telegram_username, wallet_address, auth_provider, role, plan, subscription_expires_at, created_at
@@ -368,14 +368,14 @@ def admin_set_user_role(admin_user_id, target_user_id, new_role, add_days=0):
     req_user = cursor.fetchone()
     if not req_user or req_user['role'] not in ['admin', 'founder']:
         conn.close()
-        raise PermissionError("دسترسی غیرمجاز / Admin access required")
+        raise PermissionError("Access denied. Admin access required.")
 
     now_ms = int(time.time() * 1000)
     cursor.execute("SELECT subscription_expires_at FROM users WHERE id = ?", (target_user_id,))
     target = cursor.fetchone()
     if not target:
         conn.close()
-        raise ValueError("کاربر یافت نشد / User not found")
+        raise ValueError("User not found")
 
     current_exp = target['subscription_expires_at'] or 0
     if new_role == 'admin':
