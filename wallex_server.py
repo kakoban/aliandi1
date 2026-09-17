@@ -15,7 +15,7 @@ import sys
 import database as db
 import telegram_bot as tg_bot
 
-PORT = 8000
+PORT = int(os.environ.get("PORT", 8000))
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 WALLEX_API_KEY = "20577|4LqWQnuVzrWCmKsbLNTbbzUSKXF4BsfnMyxnVJwM"
 WALLEX_BASE = "https://api.wallex.ir"

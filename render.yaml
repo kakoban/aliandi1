@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: mrsignalll-web
+    runtime: python
+    buildCommand: echo "Zero dependencies"
+    startCommand: python wallex_server.py
+    plan: free
+    autoDeploy: true
