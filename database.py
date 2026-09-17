@@ -74,23 +74,23 @@ def init_db():
     cursor.execute("SELECT id FROM users WHERE LOWER(telegram_username) = 'the_foundder'")
     founder_row = cursor.fetchone()
     if founder_row:
-        cursor.execute("UPDATE users SET role = 'founder', plan = 'lifetime', subscription_expires_at = ?, username = 'فاندر سامانه (MRSIGNALLL)' WHERE id = ?", (lifetime_ms, founder_row['id']))
+        cursor.execute("UPDATE users SET role = 'founder', plan = 'lifetime', subscription_expires_at = ?, username = 'MRSIGNALLL Founder (@the_foundder)' WHERE id = ?", (lifetime_ms, founder_row['id']))
     else:
         cursor.execute('''
         INSERT INTO users (username, telegram_username, auth_provider, role, plan, subscription_expires_at, created_at, updated_at)
         VALUES (?, 'the_foundder', 'telegram', 'founder', 'lifetime', ?, ?, ?)
-        ''', ('فاندر سامانه (MRSIGNALLL)', lifetime_ms, now_ms, now_ms))
+        ''', ('MRSIGNALLL Founder (@the_foundder)', lifetime_ms, now_ms, now_ms))
 
     # 2. Ensure Admin account (@Havaeiop)
     cursor.execute("SELECT id FROM users WHERE LOWER(telegram_username) = 'havaeiop'")
     admin_row = cursor.fetchone()
     if admin_row:
-        cursor.execute("UPDATE users SET role = 'admin', plan = 'lifetime', subscription_expires_at = ?, username = 'ادمین سیستم (@Havaeiop)' WHERE id = ?", (lifetime_ms, admin_row['id']))
+        cursor.execute("UPDATE users SET role = 'admin', plan = 'lifetime', subscription_expires_at = ?, username = 'System Admin (@Havaeiop)' WHERE id = ?", (lifetime_ms, admin_row['id']))
     else:
         cursor.execute('''
         INSERT INTO users (username, telegram_username, auth_provider, role, plan, subscription_expires_at, created_at, updated_at)
         VALUES (?, 'Havaeiop', 'telegram', 'admin', 'lifetime', ?, ?, ?)
-        ''', ('ادمین سیستم (@Havaeiop)', lifetime_ms, now_ms, now_ms))
+        ''', ('System Admin (@Havaeiop)', lifetime_ms, now_ms, now_ms))
 
     conn.commit()
     conn.close()
@@ -204,12 +204,12 @@ def auth_telegram(telegram_id=None, username=None, display_name=None):
             role = 'founder'
             plan = 'lifetime'
             exp = now_ms + (100 * 365 * 24 * 60 * 60 * 1000)
-            display = 'فاندر سامانه (MRSIGNALLL)'
+            display = 'MRSIGNALLL Founder (@the_foundder)'
         elif is_admin:
             role = 'admin'
             plan = 'lifetime'
             exp = now_ms + (100 * 365 * 24 * 60 * 60 * 1000)
-            display = 'ادمین سیستم (@Havaeiop)'
+            display = 'System Admin (@Havaeiop)'
         else:
             role = 'free'
             plan = 'none'

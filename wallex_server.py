@@ -311,17 +311,17 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                 # Admin notification for donation
                 user_name = updated_user.get('username') if updated_user else 'کاربر مهمان'
                 deposit_alert = (
-                    f"❤️ <b>حمایت مالی و دونیت جدید دریافت شد!</b>\n"
-                    f"• حامی: <b>{user_name}</b>\n"
-                    f"• مبلغ دونیت: <b>{amount} USDT</b>\n"
-                    f"• شبکه: {network}\n"
-                    f"• هش: <code>{tx_hash}</code>"
+                    f"❤️ <b>New Voluntary Donation Received!</b>\n"
+                    f"• Supporter: <b>{user_name}</b>\n"
+                    f"• Donation Amount: <b>{amount} USDT</b>\n"
+                    f"• Network: {network}\n"
+                    f"• TxHash: <code>{tx_hash}</code>"
                 )
                 tg_bot.notify_admin(deposit_alert)
 
                 res = {
                     "success": True,
-                    "message": "تراکنش تأیید شد و اشتراک فعال گردید / Transaction verified",
+                    "message": "Donation verified successfully! Thank you for supporting MRSIGNALLL.",
                     "txHash": tx_hash,
                     "network": network,
                     "plan": plan,

@@ -6,7 +6,7 @@
 'use strict';
 
 const $ = id => document.getElementById(id);
-let language = 'fa';
+let language = 'en';
 let currentTheme = 'dark';
 let direction = 1; // 1 = LONG, -1 = SHORT
 let lastResult = null;
@@ -144,8 +144,8 @@ const messages = {
     'Automatic copying unavailable. Copy text manually.'
   ],
   title: [
-    'MRSIGNALLL | ماشین‌حساب حرفه‌ای فیوچرز بایننس',
-    'MRSIGNALLL | Binance-Style Futures Calculator'
+    'MRSIGNALLL | Professional Binance Futures Risk & Position Calculator',
+    'MRSIGNALLL | Professional Binance Futures Risk & Position Calculator'
   ]
 };
 
@@ -670,5 +670,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let savedLang;
   try { savedLang = localStorage.getItem('mrsignalll-language'); } catch (e) {}
-  setLanguage(savedLang || 'fa');
+  setLanguage(savedLang || 'en');
 });
