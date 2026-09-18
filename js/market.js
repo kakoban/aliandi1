@@ -169,7 +169,10 @@ function validCoin(value) {
 }
 
 function priceValue(n) {
-  return Number(n.toPrecision(12)).toString();
+  if (!Number.isFinite(n)) return '';
+  if (n >= 1000) return Number(n.toFixed(2)).toString();
+  if (n >= 1) return Number(n.toFixed(4)).toString();
+  return Number(n.toPrecision(6)).toString();
 }
 
 function cancelQuote() {

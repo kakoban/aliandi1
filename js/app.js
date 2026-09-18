@@ -315,6 +315,7 @@ function calculate() {
     if (warnBox) warnBox.hidden = true;
     const copyBtn = $('copyReport');
     if (copyBtn) copyBtn.disabled = true;
+    if (typeof updateMultiTP === 'function') updateMultiTP(false);
   };
 
   if (errors.length) {
@@ -391,6 +392,7 @@ function calculate() {
 
   // Update Hero trade preview lines dynamically
   updateHeroPreview(v, r);
+  if (typeof updateMultiTP === 'function') updateMultiTP(false);
 }
 
 function updateHeroPreview(v, r) {
@@ -432,7 +434,7 @@ function setDirection(next) {
   $('short').setAttribute('aria-pressed', String(next === -1));
   calculate();
   try {
-    updateMultiTP();
+    if (typeof updateMultiTP === 'function') updateMultiTP(true);
     updateSubscriptionUI();
   } catch (e) {}
 }
@@ -469,7 +471,7 @@ function setCoin(symbol, autoFetch = true) {
   renderQuote();
   calculate();
   try {
-    updateMultiTP();
+    if (typeof updateMultiTP === 'function') updateMultiTP(true);
     updateSubscriptionUI();
   } catch (e) {}
 
@@ -660,6 +662,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if ($('btnExportPine')) $('btnExportPine').addEventListener('click', exportPineScript);
   if ($('btnExportJournal')) $('btnExportJournal').addEventListener('click', exportTradeJournal);
+
+  // Multi-TP dynamic recalculation on manual user edit
+  ['tp1Input', 'tp2Input', 'tp3Input'].forEach(id => {
+    const el = $(id);
+    if (el) {
+      el.addEventListener('input', () => {
+        if (typeof updateMultiTP === 'function') updateMultiTP(false);
+      });
+    }
+  });
 
   // Initial Sync
   initTheme();

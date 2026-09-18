@@ -2,36 +2,108 @@
  * MRSIGNALLL Pro Tools: Multi-TP Ladder, Pine Script & Trade Journal Exporters
  */
 
-function updateMultiTP() {
-  if (!lastResult) return;
-  const e = number('entry');
-  const t = number('target');
-  if (!e || e <= 0) return;
-
-  const tp1 = number('tp1Input') || (direction === 1 ? e * 1.02 : e * 0.98);
-  const tp2 = number('tp2Input') || (direction === 1 ? e * 1.04 : e * 0.96);
-  const tp3 = number('tp3Input') || (t && t > 0 ? t : (direction === 1 ? e * 1.06 : e * 0.94));
-
+function updateMultiTP(forceRecalculate = false) {
   const tp1El = document.getElementById('tp1Input');
   const tp2El = document.getElementById('tp2Input');
   const tp3El = document.getElementById('tp3Input');
-
-  if (tp1El && !tp1El.value) tp1El.value = priceValue(tp1);
-  if (tp2El && !tp2El.value) tp2El.value = priceValue(tp2);
-  if (tp3El && !tp3El.value) tp3El.value = priceValue(tp3);
-
-  const q = lastResult.q;
-  const p1 = (q * 0.5) * direction * (tp1 - e);
-  const p2 = (q * 0.3) * direction * (tp2 - e);
-  const p3 = (q * 0.2) * direction * (tp3 - e);
-
   const p1El = document.getElementById('tp1Profit');
   const p2El = document.getElementById('tp2Profit');
   const p3El = document.getElementById('tp3Profit');
 
-  if (p1El) p1El.textContent = `+${fmt(p1)} USDT (50%)`;
-  if (p2El) p2El.textContent = `+${fmt(p2)} USDT (30%)`;
-  if (p3El) p3El.textContent = `+${fmt(p3)} USDT (20%)`;
+  if (!tp1El || !tp2El || !tp3El) return;
+
+  if (!lastResult) {
+    if (p1El) p1El.textContent = '— (50%)';
+    if (p2El) p2El.textContent = '— (30%)';
+    if (p3El) p3El.textContent = '— (20%)';
+    return;
+  }
+
+  const e = number('entry');
+  const s = number('stop');
+  const t = number('target');
+  if (!Number.isFinite(e) || e <= 0) return;
+
+  const q = lastResult.q;
+  if (!Number.isFinite(q) || q <= 0) return;
+
+  let currentTp1 = number('tp1Input');
+  let currentTp2 = number('tp2Input');
+  let currentTp3 = number('tp3Input');
+
+  // Check if existing input is on the wrong side of entry or belongs to a different coin scale (>150% away)
+  const isInvalidLevel = val => {
+    if (!Number.isFinite(val) || val <= 0) return true;
+    if (direction === 1 && val <= e) return true;
+    if (direction === -1 && val >= e) return true;
+    const distRatio = Math.abs(val - e) / e;
+    if (distRatio > 1.5) return true;
+    return false;
+  };
+
+  const shouldResetLadder = forceRecalculate ||
+    !tp1El.value ||
+    !tp2El.value ||
+    !tp3El.value ||
+    isInvalidLevel(currentTp1) ||
+    isInvalidLevel(currentTp2) ||
+    isInvalidLevel(currentTp3);
+
+  if (shouldResetLadder) {
+    const slDist = (Number.isFinite(s) && s > 0 && Math.abs(e - s) > 0) ? Math.abs(e - s) : (e * 0.02);
+    const hasValidTarget = Number.isFinite(t) && t > 0 && (direction === 1 ? t > e : t < e);
+
+    if (hasValidTarget) {
+      const totalDist = Math.abs(t - e);
+      currentTp1 = e + direction * (totalDist * 0.35);
+      currentTp2 = e + direction * (totalDist * 0.70);
+      currentTp3 = t;
+    } else {
+      currentTp1 = e + direction * (slDist * 1.5);
+      currentTp2 = e + direction * (slDist * 2.5);
+      currentTp3 = e + direction * (slDist * 4.0);
+    }
+
+    tp1El.value = priceValue(currentTp1);
+    tp2El.value = priceValue(currentTp2);
+    tp3El.value = priceValue(currentTp3);
+  }
+
+  // Calculate net profit for each TP level
+  const feeRate = ((lastResult.inputs && lastResult.inputs.fee) || 0.05) / 100.0;
+  const calcProfit = (tpVal, share) => {
+    if (!Number.isFinite(tpVal) || tpVal <= 0) return null;
+    const isProfitableSide = direction === 1 ? tpVal > e : tpVal < e;
+    if (!isProfitableSide) return null;
+    const shareQty = q * share;
+    const gross = shareQty * direction * (tpVal - e);
+    const exitFee = shareQty * tpVal * feeRate;
+    const entryFee = shareQty * e * feeRate;
+    const net = gross - (exitFee + entryFee);
+    return net;
+  };
+
+  const p1 = calcProfit(number('tp1Input'), 0.50);
+  const p2 = calcProfit(number('tp2Input'), 0.30);
+  const p3 = calcProfit(number('tp3Input'), 0.20);
+
+  const renderProfitText = (el, val, shareText) => {
+    if (!el) return;
+    if (val === null || !Number.isFinite(val)) {
+      el.textContent = `— (${shareText})`;
+      el.style.color = 'var(--text-tertiary)';
+    } else if (val >= 0) {
+      el.textContent = `+${fmt(val)} USDT (${shareText})`;
+      el.style.color = 'var(--success)';
+    } else {
+      el.textContent = `-${fmt(Math.abs(val))} USDT (${shareText})`;
+      el.style.color = 'var(--danger)';
+    }
+  };
+
+  renderProfitText(p1El, p1, '50%');
+  renderProfitText(p2El, p2, '30%');
+  renderProfitText(p3El, p3, '20%');
 }
 
 /**

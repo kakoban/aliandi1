@@ -72,43 +72,53 @@
 }
 
 .multitp-col {
-  background: #121519;
+  background: var(--bg-surface-alt);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 8px;
+  padding: 10px 12px;
+  transition: all var(--transition-fast);
+}
+
+.multitp-col:focus-within {
+  border-color: var(--brand-primary);
 }
 
 .multitp-col label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-secondary);
-  display: block;
-  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
 }
 
 .multitp-col input {
   width: 100%;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-xs);
-  padding: 6px 8px;
+  padding: 7px 10px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   direction: ltr;
   background: var(--bg-input);
   color: var(--text-primary);
+  transition: border-color var(--transition-fast);
 }
 
 .multitp-col input:focus {
   border-color: var(--brand-primary);
+  box-shadow: 0 0 0 1px var(--brand-primary);
 }
 
 .multitp-col span {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--success);
-  margin-top: 4px;
+  margin-top: 6px;
   direction: ltr;
+  font-family: var(--font-mono);
 }
 
 .premium-actions {
