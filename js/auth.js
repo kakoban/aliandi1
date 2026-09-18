@@ -77,6 +77,62 @@ async function initAuth() {
   }
 }
 
+const AVATAR_ICONS = [
+  { key: 'bull', emoji: '🐂', name: 'Bull' },
+  { key: 'bear', emoji: '🐻', name: 'Bear' },
+  { key: 'whale', emoji: '🐋', name: 'Whale' },
+  { key: 'rocket', emoji: '🚀', name: 'Rocket' },
+  { key: 'diamond', emoji: '💎', name: 'Diamond' },
+  { key: 'ninja', emoji: '🥷', name: 'Ninja' },
+  { key: 'wizard', emoji: '🧙', name: 'Wizard' },
+  { key: 'fire', emoji: '🔥', name: 'Fire' },
+  { key: 'crown', emoji: '👑', name: 'Crown' },
+  { key: 'bolt', emoji: '⚡', name: 'Bolt' },
+  { key: 'lion', emoji: '🦁', name: 'Lion' },
+  { key: 'target', emoji: '🎯', name: 'Sniper' }
+];
+
+const AVATAR_COLORS = [
+  { hex: '#F0B90B', name: 'Binance Gold' },
+  { hex: '#0ECB81', name: 'Cyber Green' },
+  { hex: '#229ED9', name: 'Telegram Blue' },
+  { hex: '#F6465D', name: 'Liquid Ruby' },
+  { hex: '#9D5BD2', name: 'Neon Purple' },
+  { hex: '#F6851B', name: 'MetaMask Orange' },
+  { hex: '#363D47', name: 'Stealth Titanium' }
+];
+
+function renderAvatarHtml(avatarStr, username = 'U') {
+  if (avatarStr && avatarStr.startsWith('url:')) {
+    const url = avatarStr.slice(4);
+    return `<img src="${url}" alt="${username}" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\\'avatar-emoji\\'>👤</span>';">`;
+  }
+  if (avatarStr && avatarStr.startsWith('preset:')) {
+    const parts = avatarStr.slice(7).split('|');
+    const iconKey = parts[0] || 'bull';
+    const color = parts[1] || '#F0B90B';
+    const iconObj = AVATAR_ICONS.find(i => i.key === iconKey) || AVATAR_ICONS[0];
+    return `<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;"><span class="avatar-emoji">${iconObj.emoji}</span></div>`;
+  }
+  const charCode = (username || 'U').charCodeAt(0) || 65;
+  const defIcon = AVATAR_ICONS[charCode % AVATAR_ICONS.length];
+  const defColor = AVATAR_COLORS[charCode % AVATAR_COLORS.length].hex;
+  return `<div style="width:100%;height:100%;background:${defColor};display:flex;align-items:center;justify-content:center;"><span class="avatar-emoji">${defIcon.emoji}</span></div>`;
+}
+
+function renderBadgesHtml(badges, compact = false) {
+  if (!Array.isArray(badges) || badges.length === 0) return '';
+  return badges.map(b => {
+    const bg = b.color ? `${b.color}22` : 'rgba(240, 185, 11, 0.15)';
+    const border = b.color ? `${b.color}66` : 'rgba(240, 185, 11, 0.4)';
+    const color = b.color || 'var(--brand-primary)';
+    return `<span class="discord-badge" style="background:${bg};border:1px solid ${border};color:${color};" title="${b.desc || b.label}">
+      <span class="discord-badge-icon">${b.icon || '★'}</span>
+      ${!compact ? `<span>${b.label}</span>` : ''}
+    </span>`;
+  }).join('');
+}
+
 function renderUserNav() {
   const btnAuth = document.getElementById('btnOpenAuth');
   const chipWrap = document.getElementById('userChipWrap');
@@ -86,14 +142,18 @@ function renderUserNav() {
   const dropUserTitle = document.getElementById('dropUserTitle');
   const dropSubStatus = document.getElementById('dropSubStatus');
   const dropAdminItem = document.getElementById('dropAdminItem');
+  const inlineBadges = document.getElementById('userBadgesInline');
+  const dropBadges = document.getElementById('dropBadgesRack');
 
   if (currentUser) {
     if (btnAuth) btnAuth.style.display = 'none';
-    if (chipWrap) chipWrap.style.display = 'block';
+    if (chipWrap) chipWrap.style.display = 'inline-flex';
 
-    const displayName = currentUser.username || currentUser.telegram_username || 'User';
+    const displayName = currentUser.username || currentUser.telegram_username || 'Trader';
     if (nameEl) nameEl.textContent = displayName;
-    if (avatarEl) avatarEl.textContent = (displayName[0] || 'U').toUpperCase();
+    if (avatarEl) {
+      avatarEl.innerHTML = renderAvatarHtml(currentUser.avatar, displayName);
+    }
 
     const role = currentUser.role || 'free';
     const sub = currentUser.subscription || {};
@@ -101,26 +161,36 @@ function renderUserNav() {
     if (badgeEl) {
       badgeEl.className = `role-badge ${role}`;
       if (role === 'founder') {
-        badgeEl.textContent = language === 'fa' ? '★ فاندر سامانه' : '★ Founder';
+        badgeEl.textContent = (typeof language !== 'undefined' && language === 'fa') ? '★ فاندر سامانه' : '★ Founder';
       } else if (role === 'admin') {
-        badgeEl.textContent = language === 'fa' ? '🛡️ ادمین سیستم' : '🛡️ Admin';
+        badgeEl.textContent = (typeof language !== 'undefined' && language === 'fa') ? '🛡️ ادمین سیستم' : '🛡️ Admin';
       } else if (role === 'premium' || sub.active) {
-        badgeEl.textContent = language === 'fa' ? `VIP (${sub.daysLeft} روز)` : `VIP (${sub.daysLeft}d)`;
+        badgeEl.textContent = (typeof language !== 'undefined' && language === 'fa') ? `VIP (${sub.daysLeft} روز)` : `VIP (${sub.daysLeft}d)`;
       } else {
-        badgeEl.textContent = language === 'fa' ? 'عادی' : 'Free';
+        badgeEl.textContent = (typeof language !== 'undefined' && language === 'fa') ? 'عادی' : 'Free';
       }
+    }
+
+    // Render Discord badges in nav chip & dropdown
+    if (inlineBadges) {
+      inlineBadges.innerHTML = renderBadgesHtml(currentUser.badges, true);
+    }
+    if (dropBadges) {
+      dropBadges.innerHTML = renderBadgesHtml(currentUser.badges, false);
     }
 
     if (dropUserTitle) dropUserTitle.textContent = displayName;
     if (dropSubStatus) {
-      if (role === 'founder') {
-        dropSubStatus.textContent = language === 'fa' ? 'فاندر و صاحب سامانه (Lifetime VIP)' : 'System Founder & Owner';
+      if (currentUser.bio) {
+        dropSubStatus.textContent = currentUser.bio;
+      } else if (role === 'founder') {
+        dropSubStatus.textContent = (typeof language !== 'undefined' && language === 'fa') ? 'فاندر و صاحب سامانه (Lifetime VIP)' : 'System Founder & Owner';
       } else if (role === 'admin') {
-        dropSubStatus.textContent = language === 'fa' ? 'ادمین سیستم و ارتباطات (Admin Access)' : 'System & Communications Admin';
+        dropSubStatus.textContent = (typeof language !== 'undefined' && language === 'fa') ? 'ادمین سیستم و ارتباطات (Admin Access)' : 'System & Communications Admin';
       } else if (sub.active) {
-        dropSubStatus.textContent = language === 'fa' ? `اشتراک ویژه تا ${sub.daysLeft} روز دیگر معتبر است` : `VIP Active: ${sub.daysLeft} days remaining`;
+        dropSubStatus.textContent = (typeof language !== 'undefined' && language === 'fa') ? `اشتراک ویژه تا ${sub.daysLeft} روز دیگر معتبر است` : `VIP Active: ${sub.daysLeft} days remaining`;
       } else {
-        dropSubStatus.textContent = language === 'fa' ? 'پلن کاربری: عادی و دمو رایگان' : 'Account: Free Demo Tier';
+        dropSubStatus.textContent = (typeof language !== 'undefined' && language === 'fa') ? 'پلن کاربری: عادی و دمو رایگان' : 'Account: Free Demo Tier';
       }
     }
 
@@ -467,3 +537,210 @@ document.addEventListener('click', (e) => {
     drop.classList.remove('show');
   }
 });
+
+// ==========================================================================
+// Discord-Style Profile Customization Controller
+// ==========================================================================
+let currentEditAvatar = {
+  type: 'preset',
+  icon: 'bull',
+  color: '#F0B90B',
+  url: ''
+};
+
+function parseAvatar(avatarStr, username = 'U') {
+  if (avatarStr && avatarStr.startsWith('url:')) {
+    return { type: 'url', icon: 'bull', color: '#F0B90B', url: avatarStr.slice(4) };
+  }
+  if (avatarStr && avatarStr.startsWith('preset:')) {
+    const parts = avatarStr.slice(7).split('|');
+    return { type: 'preset', icon: parts[0] || 'bull', color: parts[1] || '#F0B90B', url: '' };
+  }
+  const charCode = (username || 'U').charCodeAt(0) || 65;
+  const defIcon = AVATAR_ICONS[charCode % AVATAR_ICONS.length].key;
+  const defColor = AVATAR_COLORS[charCode % AVATAR_COLORS.length].hex;
+  return { type: 'preset', icon: defIcon, color: defColor, url: '' };
+}
+
+function openProfileModal() {
+  toggleUserDropdown(false);
+  if (!currentUser) return;
+
+  const modal = document.getElementById('profileModal');
+  if (!modal) return;
+
+  currentEditAvatar = parseAvatar(currentUser.avatar, currentUser.username);
+
+  const nameInput = document.getElementById('profileNameInput');
+  const bioInput = document.getElementById('profileBioInput');
+  const imgUrlInput = document.getElementById('profileImgUrlInput');
+
+  if (nameInput) nameInput.value = currentUser.username || '';
+  if (bioInput) bioInput.value = currentUser.bio || '';
+  if (imgUrlInput) imgUrlInput.value = currentEditAvatar.type === 'url' ? currentEditAvatar.url : '';
+
+  renderAvatarPresetsUI();
+  updateProfilePreview();
+
+  modal.style.display = 'flex';
+}
+
+function closeProfileModal() {
+  const modal = document.getElementById('profileModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function renderAvatarPresetsUI() {
+  const grid = document.getElementById('avatarPresetsGrid');
+  if (grid) {
+    grid.innerHTML = AVATAR_ICONS.map(i => `
+      <button type="button" class="avatar-preset-btn ${currentEditAvatar.type === 'preset' && currentEditAvatar.icon === i.key ? 'active' : ''}" onclick="selectAvatarPreset('${i.key}')" title="${i.name}">
+        <span>${i.emoji}</span>
+      </button>
+    `).join('');
+  }
+
+  const colorsRow = document.getElementById('colorSwatchesRow');
+  if (colorsRow) {
+    colorsRow.innerHTML = AVATAR_COLORS.map(c => `
+      <button type="button" class="color-swatch ${currentEditAvatar.color === c.hex ? 'active' : ''}" style="background:${c.hex};" onclick="selectAvatarColor('${c.hex}')" title="${c.name}"></button>
+    `).join('');
+  }
+}
+
+function selectAvatarPreset(iconKey) {
+  currentEditAvatar.type = 'preset';
+  currentEditAvatar.icon = iconKey;
+  const imgUrlInput = document.getElementById('profileImgUrlInput');
+  if (imgUrlInput) imgUrlInput.value = '';
+  renderAvatarPresetsUI();
+  updateProfilePreview();
+}
+
+function selectAvatarColor(colorHex) {
+  currentEditAvatar.color = colorHex;
+  renderAvatarPresetsUI();
+  updateProfilePreview();
+}
+
+function onCustomAvatarUrlInput() {
+  const input = document.getElementById('profileImgUrlInput');
+  const val = input ? input.value.trim() : '';
+  if (val && /^https?:\/\//i.test(val)) {
+    currentEditAvatar.type = 'url';
+    currentEditAvatar.url = val;
+  } else {
+    currentEditAvatar.type = 'preset';
+  }
+  renderAvatarPresetsUI();
+  updateProfilePreview();
+}
+
+function randomizeProfileAvatar() {
+  const randomIcon = AVATAR_ICONS[Math.floor(Math.random() * AVATAR_ICONS.length)].key;
+  const randomColor = AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)].hex;
+  currentEditAvatar.type = 'preset';
+  currentEditAvatar.icon = randomIcon;
+  currentEditAvatar.color = randomColor;
+  currentEditAvatar.url = '';
+
+  const imgUrlInput = document.getElementById('profileImgUrlInput');
+  if (imgUrlInput) imgUrlInput.value = '';
+
+  renderAvatarPresetsUI();
+  updateProfilePreview();
+
+  const av = document.getElementById('profileAvatarPreview');
+  if (av) {
+    av.style.transform = 'scale(1.2) rotate(15deg)';
+    setTimeout(() => { av.style.transform = ''; }, 200);
+  }
+}
+
+function updateProfilePreview() {
+  if (!currentUser) return;
+  const nameInput = document.getElementById('profileNameInput');
+  const bioInput = document.getElementById('profileBioInput');
+
+  const displayName = (nameInput && nameInput.value.trim()) || currentUser.username || 'Trader';
+  const bio = (bioInput && bioInput.value.trim()) || currentUser.bio || 'Precision Futures Trader · MRSIGNALLL';
+
+  const namePrev = document.getElementById('profileNamePreview');
+  const handlePrev = document.getElementById('profileHandlePreview');
+  const bioPrev = document.getElementById('profileBioPreview');
+  const bannerPrev = document.getElementById('profileBannerPreview');
+  const avatarPrev = document.getElementById('profileAvatarPreview');
+  const badgesPrev = document.getElementById('profileBadgesPreview');
+
+  if (namePrev) namePrev.textContent = displayName;
+  if (handlePrev) handlePrev.textContent = currentUser.telegram_username ? `@${currentUser.telegram_username}` : (currentUser.email || `@trader_${currentUser.id}`);
+  if (bioPrev) bioPrev.textContent = bio;
+
+  const themeColor = currentEditAvatar.color || '#F0B90B';
+  if (bannerPrev) {
+    bannerPrev.style.background = `linear-gradient(135deg, ${themeColor}77 0%, #181D24 100%)`;
+  }
+
+  if (avatarPrev) {
+    const avatarStr = currentEditAvatar.type === 'url' && currentEditAvatar.url
+      ? `url:${currentEditAvatar.url}`
+      : `preset:${currentEditAvatar.icon}|${currentEditAvatar.color}`;
+    avatarPrev.innerHTML = renderAvatarHtml(avatarStr, displayName);
+  }
+
+  if (badgesPrev) {
+    badgesPrev.innerHTML = renderBadgesHtml(currentUser.badges, false);
+  }
+}
+
+async function saveUserProfile() {
+  if (!currentUser) return;
+  const nameInput = document.getElementById('profileNameInput');
+  const bioInput = document.getElementById('profileBioInput');
+  const btnSave = document.getElementById('btnSaveProfile');
+
+  const username = nameInput ? nameInput.value.trim() : '';
+  const bio = bioInput ? bioInput.value.trim() : '';
+
+  if (!username) {
+    notify((typeof language !== 'undefined' && language === 'fa') ? 'نام کاربری نمی‌تواند خالی باشد.' : 'Display Name cannot be empty.');
+    return;
+  }
+
+  const avatarStr = currentEditAvatar.type === 'url' && currentEditAvatar.url
+    ? `url:${currentEditAvatar.url}`
+    : `preset:${currentEditAvatar.icon}|${currentEditAvatar.color}`;
+
+  if (btnSave) btnSave.disabled = true;
+
+  try {
+    const res = await apiFetch('/api/user/profile', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        bio,
+        avatar: avatarStr
+      })
+    });
+
+    if (res.success && res.user) {
+      currentUser = res.user;
+      renderUserNav();
+      closeProfileModal();
+      notify((typeof language !== 'undefined' && language === 'fa') ? 'نمایه با موفقیت ذخیره شد! 🎨' : 'Profile updated successfully! 🎨');
+    }
+  } catch (err) {
+    notify(err.message);
+  } finally {
+    if (btnSave) btnSave.disabled = false;
+  }
+}
+
+window.openProfileModal = openProfileModal;
+window.closeProfileModal = closeProfileModal;
+window.randomizeProfileAvatar = randomizeProfileAvatar;
+window.selectAvatarPreset = selectAvatarPreset;
+window.selectAvatarColor = selectAvatarColor;
+window.onCustomAvatarUrlInput = onCustomAvatarUrlInput;
+window.updateProfilePreview = updateProfilePreview;
+window.saveUserProfile = saveUserProfile;

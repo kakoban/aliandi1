@@ -513,30 +513,6 @@ html[lang="en"] .user-chip {
   color: var(--brand-primary);
 }
 
-/* Auth Alerts */
-.auth-alert {
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  margin-bottom: 14px;
-  line-height: 1.5;
-  display: none;
-}
-
-.auth-alert.error {
-  background: var(--danger-bg);
-  color: var(--danger);
-  border: 1px solid var(--danger-border);
-  display: block;
-}
-
-.auth-alert.success {
-  background: var(--success-bg);
-  color: var(--success);
-  border: 1px solid var(--success-border);
-  display: block;
-}
-
 /* ==========================================================================
    3. Admin Management Panel Modal
    ========================================================================== */
@@ -608,4 +584,312 @@ html[lang="en"] .user-chip {
   background: var(--brand-primary-bg);
   color: var(--brand-primary);
   border-color: rgba(240, 185, 11, 0.35);
+}
+
+/* ==========================================================================
+   4. Discord-Style Avatar & Badge System
+   ========================================================================== */
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: #1E2329;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-avatar .avatar-emoji {
+  line-height: 1;
+  font-size: 14px;
+}
+
+/* Inline Discord Badges Rack */
+.badge-rack {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.discord-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: default;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  white-space: nowrap;
+}
+
+.discord-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.discord-badge-icon {
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   5. Discord-Style Profile Customization Modal
+   ========================================================================== */
+.profile-modal-card {
+  max-width: 480px;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+}
+
+.profile-modal-close {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 14px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  transition: background var(--transition-fast);
+}
+
+.profile-modal-close:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.discord-card-preview {
+  background: #181D24;
+  position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.discord-banner {
+  height: 85px;
+  background: linear-gradient(135deg, #1E2329 0%, #2B3139 100%);
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.discord-avatar-wrap {
+  position: absolute;
+  bottom: -30px;
+  inset-inline-start: 20px;
+}
+
+.discord-avatar-large {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 4px solid #181D24;
+  background: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.discord-avatar-large:hover {
+  transform: scale(1.05);
+}
+
+.discord-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discord-status-dot {
+  position: absolute;
+  bottom: 2px;
+  inset-inline-end: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #23A55A;
+  border: 3px solid #181D24;
+}
+
+.discord-profile-details {
+  padding: 38px 20px 16px;
+}
+
+.discord-names {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.discord-username {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.discord-handle {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.discord-badges-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.discord-bio-preview {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 32px;
+}
+
+/* Modal Body Form */
+.profile-modal-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg-surface);
+  max-height: 48vh;
+  overflow-y: auto;
+}
+
+.avatar-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.avatar-preset-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-alt);
+  border: 2px solid transparent;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.avatar-preset-btn:hover {
+  transform: scale(1.1);
+  border-color: rgba(240, 185, 11, 0.4);
+}
+
+.avatar-preset-btn.active {
+  border-color: var(--brand-primary);
+  background: rgba(240, 185, 11, 0.15);
+  box-shadow: 0 0 10px rgba(240, 185, 11, 0.3);
+}
+
+.color-swatches-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+}
+
+.color-swatch.active {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 8px currentColor;
+  transform: scale(1.1);
+}
+
+.btn-random-avatar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-random-avatar:hover {
+  background: var(--brand-primary);
+  color: #121519;
+  border-color: var(--brand-primary);
+  transform: translateY(-1px);
+}
+
+.dice-icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.btn-random-avatar:active .dice-icon {
+  transform: rotate(180deg);
+}
+
+.profile-modal-footer {
+  padding: 12px 20px;
+  background: var(--bg-surface-alt);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
 }

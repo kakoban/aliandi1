@@ -335,6 +335,32 @@ class WallexRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode("utf-8"))
             return
 
+        # 8. Update User Profile (Avatar, Username, Bio)
+        elif self.path == "/api/user/profile":
+            user = self._get_current_user()
+            if not user:
+                self._set_cors_headers(401)
+                self.wfile.write(json.dumps({"success": False, "message": "Authentication required"}, ensure_ascii=False).encode("utf-8"))
+                return
+
+            try:
+                username = data.get("username")
+                avatar = data.get("avatar")
+                bio = data.get("bio")
+
+                db.update_user_profile(user["id"], username=username, avatar=avatar, bio=bio)
+                updated_user = db.get_user_by_session(self._get_auth_token())
+                self._set_cors_headers(200)
+                self.wfile.write(json.dumps({
+                    "success": True,
+                    "user": updated_user,
+                    "message": "Profile updated successfully."
+                }, ensure_ascii=False).encode("utf-8"))
+            except Exception as e:
+                self._set_cors_headers(500)
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode("utf-8"))
+            return
+
         else:
             self._set_cors_headers(404)
             self.wfile.write(json.dumps({"success": False, "message": "Not found"}).encode("utf-8"))

@@ -29,12 +29,12 @@
   </script>
 
   <!-- Modular Binance-Style CSS Architecture -->
-  <link rel="stylesheet" href="css/binance-theme.css?v=5">
-  <link rel="stylesheet" href="css/layout.css?v=5">
-  <link rel="stylesheet" href="css/calculator.css?v=5">
-  <link rel="stylesheet" href="css/wallex-payment.css?v=5">
-  <link rel="stylesheet" href="css/components.css?v=5">
-  <link rel="stylesheet" href="css/auth.css?v=5">
+  <link rel="stylesheet" href="css/binance-theme.css?v=7">
+  <link rel="stylesheet" href="css/layout.css?v=7">
+  <link rel="stylesheet" href="css/calculator.css?v=7">
+  <link rel="stylesheet" href="css/wallex-payment.css?v=7">
+  <link rel="stylesheet" href="css/components.css?v=7">
+  <link rel="stylesheet" href="css/auth.css?v=7">
 </head>
 <body>
 
@@ -80,6 +80,7 @@
             <div class="user-chip" id="userChip" onclick="toggleUserDropdown()">
               <div class="user-avatar" id="userAvatarText">U</div>
               <span class="user-name-text" id="userNameText">User</span>
+              <div class="badge-rack" id="userBadgesInline"></div>
               <span class="role-badge free" id="userRoleBadge">Free</span>
               <span style="font-size:9px;color:var(--text-secondary)">▾</span>
             </div>
@@ -91,8 +92,13 @@
                   <span id="dropUserTitle">User</span>
                 </div>
                 <div class="dropdown-sub-status" id="dropSubStatus">Account Tier: Free</div>
+                <div class="discord-badges-row" id="dropBadgesRack"></div>
               </div>
               <div class="dropdown-menu-list">
+                <button type="button" class="dropdown-item" onclick="openProfileModal()">
+                  <span>🎨</span>
+                  <span data-fa="ویرایش نمایه و آواتار (Discord)" data-en="Customize Profile &amp; Avatar">Customize Profile &amp; Avatar</span>
+                </button>
                 <a href="#purchase" class="dropdown-item" onclick="toggleUserDropdown(false)">
                   <span>☕</span>
                   <span data-fa="حمایت مالی از پروژه (دونیت)" data-en="Support &amp; Donate">Support &amp; Donate</span>
@@ -1126,6 +1132,79 @@ Liquidation (short) ≈ E × (1 + 1/L) / (1 + m)</code>
     </div>
   </div>
 
+  <!-- ==========================================================================
+       14. Discord-Style Profile & Avatar Customization Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="profileModal" style="display:none;" onclick="if(event.target===this)closeProfileModal()">
+    <div class="modal-card profile-modal-card">
+      <button type="button" class="profile-modal-close" onclick="closeProfileModal()">&times;</button>
+
+      <!-- Discord Card Live Preview -->
+      <div class="discord-card-preview">
+        <div class="discord-banner" id="profileBannerPreview"></div>
+        <div class="discord-avatar-wrap">
+          <div class="discord-avatar-large" id="profileAvatarPreview" onclick="randomizeProfileAvatar()" title="Click to randomize avatar!">
+            <span class="avatar-emoji">🐂</span>
+          </div>
+          <span class="discord-status-dot" title="Online"></span>
+        </div>
+        <div class="discord-profile-details">
+          <div class="discord-names">
+            <span class="discord-username" id="profileNamePreview">User</span>
+            <span class="discord-handle" id="profileHandlePreview">@trader</span>
+          </div>
+          <div class="discord-badges-row" id="profileBadgesPreview"></div>
+          <div class="discord-bio-preview" id="profileBioPreview">Precision Futures Trader · MRSIGNALLL</div>
+        </div>
+      </div>
+
+      <!-- Editor Body Form -->
+      <div class="profile-modal-body">
+        <div class="auth-form-group">
+          <label data-fa="نام نمایشی (Display Name):" data-en="Display Name:">Display Name:</label>
+          <input type="text" id="profileNameInput" class="auth-input" maxlength="32" placeholder="Your trading alias" oninput="updateProfilePreview()">
+        </div>
+
+        <div class="auth-form-group">
+          <label data-fa="درباره من / بایو (About Me):" data-en="About Me / Bio:">About Me / Bio:</label>
+          <input type="text" id="profileBioInput" class="auth-input" maxlength="140" placeholder="e.g. Scalper & Futures trader | BTC maximalist" oninput="updateProfilePreview()">
+        </div>
+
+        <!-- Avatar Selection -->
+        <div class="auth-form-group">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <label style="margin:0;" data-fa="انتخاب نمایه و آواتار:" data-en="Choose Avatar Icon:">Choose Avatar Icon:</label>
+            <button type="button" class="btn-random-avatar" onclick="randomizeProfileAvatar()">
+              <span class="dice-icon">🎲</span>
+              <span data-fa="تصادفی (Randomize)" data-en="Randomize">Randomize</span>
+            </button>
+          </div>
+
+          <!-- 12 Trader / Discord Icons Grid -->
+          <div class="avatar-presets-grid" id="avatarPresetsGrid"></div>
+        </div>
+
+        <!-- Avatar Color Palette -->
+        <div class="auth-form-group">
+          <label data-fa="رنگ نمایه و پس‌زمینه:" data-en="Avatar Color Theme:">Avatar Color Theme:</label>
+          <div class="color-swatches-row" id="colorSwatchesRow"></div>
+        </div>
+
+        <!-- Custom Image URL (Optional) -->
+        <div class="auth-form-group">
+          <label data-fa="یا لینک تصویر دلخواه (Custom Image URL):" data-en="Or Custom Image URL:">Or Custom Image URL:</label>
+          <input type="url" id="profileImgUrlInput" class="auth-input" placeholder="https://... (image url)" dir="ltr" oninput="onCustomAvatarUrlInput()">
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="profile-modal-footer">
+        <button type="button" class="btn small dark" onclick="closeProfileModal()" data-fa="انصراف" data-en="Cancel">Cancel</button>
+        <button type="button" class="btn small primary" id="btnSaveProfile" onclick="saveUserProfile()" data-fa="ذخیره نمایه" data-en="Save Changes">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Container -->
   <div id="toast" class="toast" role="status"></div>
 
@@ -1134,12 +1213,12 @@ Liquidation (short) ≈ E × (1 + 1/L) / (1 + m)</code>
   </noscript>
 
   <!-- Modular Scripts -->
-  <script src="js/i18n.js?v=5"></script>
-  <script src="js/calculator.js?v=5"></script>
-  <script src="js/market.js?v=5"></script>
-  <script src="js/pro-tools.js?v=5"></script>
-  <script src="js/auth.js?v=5"></script>
-  <script src="js/wallex.js?v=5"></script>
-  <script src="js/app.js?v=6"></script>
+  <script src="js/i18n.js?v=7"></script>
+  <script src="js/calculator.js?v=7"></script>
+  <script src="js/market.js?v=7"></script>
+  <script src="js/pro-tools.js?v=7"></script>
+  <script src="js/auth.js?v=7"></script>
+  <script src="js/wallex.js?v=7"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>

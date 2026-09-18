@@ -67,6 +67,14 @@ def init_db():
 
     conn.commit()
 
+    # Columns migration for profile & Discord-style badges
+    for col, c_type in [("avatar", "TEXT DEFAULT ''"), ("bio", "TEXT DEFAULT ''"), ("badges", "TEXT DEFAULT ''")]:
+        try:
+            cursor.execute(f"ALTER TABLE users ADD COLUMN {col} {c_type}")
+        except Exception:
+            pass
+    conn.commit()
+
     now_ms = int(time.time() * 1000)
     lifetime_ms = now_ms + (100 * 365 * 24 * 60 * 60 * 1000) # 100 years
 
@@ -149,7 +157,54 @@ def format_user_dict(row):
         'expiresAt': exp,
         'plan': 'lifetime' if is_privileged else user.get('plan', 'none')
     }
+
+    user['avatar'] = user.get('avatar') or ''
+    user['bio'] = user.get('bio') or ''
+
+    # Discord-style profile badges
+    badges = []
+    if role == 'founder':
+        badges.append({'id': 'founder', 'label': 'Founder', 'icon': '👑', 'color': '#F0B90B', 'desc': 'MRSIGNALLL Creator & Lead Architect'})
+    if role in ['admin', 'founder']:
+        badges.append({'id': 'admin', 'label': 'Staff', 'icon': '🛡️', 'color': '#2AABEE', 'desc': 'Platform Administrator'})
+    if exp > now_ms or user.get('plan') in ['1', '3', '5', '12', '20', 'lifetime']:
+        badges.append({'id': 'supporter', 'label': 'Patron', 'icon': '💛', 'color': '#0ECB81', 'desc': 'Server Supporter & Backer'})
+    if user.get('telegram_id'):
+        badges.append({'id': 'tg_verified', 'label': 'Verified', 'icon': '🤖', 'color': '#229ED9', 'desc': 'Connected via Official Telegram Bot'})
+    if user.get('wallet_address'):
+        badges.append({'id': 'web3', 'label': 'Web3', 'icon': '🌐', 'color': '#F6851B', 'desc': 'Web3 Wallet Connected'})
+    badges.append({'id': 'trader', 'label': 'Pro Trader', 'icon': '⚡', 'color': '#FCD535', 'desc': 'Precision Futures Trader'})
+
+    user['badges'] = badges
     return user
+
+def update_user_profile(user_id, username=None, avatar=None, bio=None):
+    conn = get_db()
+    cursor = conn.cursor()
+    now_ms = int(time.time() * 1000)
+    updates = []
+    params = []
+
+    if username is not None and username.strip():
+        updates.append("username = ?")
+        params.append(username.strip()[:40])
+    if avatar is not None:
+        updates.append("avatar = ?")
+        params.append(avatar.strip()[:2000])
+    if bio is not None:
+        updates.append("bio = ?")
+        params.append(bio.strip()[:160])
+
+    if updates:
+        updates.append("updated_at = ?")
+        params.append(now_ms)
+        params.append(user_id)
+        sql = f"UPDATE users SET {', '.join(updates)} WHERE id = ?"
+        cursor.execute(sql, tuple(params))
+        conn.commit()
+
+    conn.close()
+    return True
 
 def get_user_by_session(token):
     if not token:
