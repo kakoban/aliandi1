@@ -72,6 +72,9 @@ async function initAuth() {
   if (typeof updateSubscriptionUI === 'function') {
     updateSubscriptionUI();
   }
+  if (typeof renderCoinChips === 'function') {
+    renderCoinChips();
+  }
 }
 
 function renderUserNav() {
@@ -130,11 +133,73 @@ function renderUserNav() {
   }
 }
 
-// Modal Toggle & Tabs
-function openAuthModal(defaultTab = 'telegram') {
-  const modal = document.getElementById('authModal');
+let pendingCoinAfterLogin = null;
+
+function promptAuthForCoin(symbol) {
+  pendingCoinAfterLogin = symbol;
+  const isNewCoin = symbol === 'NEW_COIN';
+  const displaySym = isNewCoin
+    ? (typeof language !== 'undefined' && language === 'fa' ? 'افزودن ارز دلخواه' : 'Custom Coins')
+    : symbol;
+
   const alertBox = document.getElementById('authAlert');
-  if (alertBox) alertBox.style.display = 'none';
+  if (alertBox) {
+    alertBox.className = 'auth-alert info';
+    alertBox.style.display = 'block';
+    alertBox.innerHTML = (typeof language !== 'undefined' && language === 'fa')
+      ? `⚡ <b>محاسبه بیت‌کوین (BTC) کاملاً رایگان است.</b><br>برای دسترسی به <b>${displaySym}</b> و تمام ۵۰۰+ آلت‌کوین، به راحتی با ربات رسمی تلگرام متصل شوید (پیشنهادی):`
+      : `⚡ <b>Bitcoin (BTC) is 100% free to calculate.</b><br>To unlock <b>${displaySym}</b> and 500+ live altcoins, connect in 1 tap via our official Telegram bot:`;
+  }
+
+  openAuthModal('telegram', false);
+
+  if (typeof notify === 'function') {
+    notify(
+      (typeof language !== 'undefined' && language === 'fa')
+        ? `برای استفاده از ${displaySym} با ربات تلگرام متصل شوید`
+        : `Connect via Telegram bot to unlock ${displaySym}`
+    );
+  }
+}
+
+// Successful authentication handler
+function onAuthSuccess(user, token) {
+  setAuthToken(token);
+  currentUser = user;
+  renderUserNav();
+  closeAuthModal();
+  if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
+  if (typeof renderCoinChips === 'function') renderCoinChips();
+
+  const nextCoin = pendingCoinAfterLogin;
+  pendingCoinAfterLogin = null;
+
+  if (nextCoin) {
+    if (nextCoin === 'NEW_COIN') {
+      if (typeof openAddCoinModal === 'function') openAddCoinModal();
+    } else if (typeof setCoin === 'function') {
+      setCoin(nextCoin, true);
+    }
+  }
+
+  notify(
+    (typeof language !== 'undefined' && language === 'fa')
+      ? `خوش آمدید ${user.username || 'کاربر گرامی'}! تمام آلت‌کوین‌ها باز شدند.`
+      : `Welcome ${user.username || 'Trader'}! All altcoins unlocked.`
+  );
+}
+
+// Modal Toggle & Tabs
+function openAuthModal(defaultTab = 'telegram', resetAlert = true) {
+  if (resetAlert) {
+    pendingCoinAfterLogin = null;
+    const alertBox = document.getElementById('authAlert');
+    if (alertBox) {
+      alertBox.style.display = 'none';
+      alertBox.className = 'auth-alert';
+    }
+  }
+  const modal = document.getElementById('authModal');
   if (modal) modal.style.display = 'flex';
   switchAuthTab(defaultTab);
 }
@@ -142,6 +207,8 @@ function openAuthModal(defaultTab = 'telegram') {
 function closeAuthModal() {
   const modal = document.getElementById('authModal');
   if (modal) modal.style.display = 'none';
+  const alertBox = document.getElementById('authAlert');
+  if (alertBox) alertBox.style.display = 'none';
 }
 
 function switchAuthTab(tabName) {
@@ -152,9 +219,6 @@ function switchAuthTab(tabName) {
   const activePanel = document.getElementById(`tabPanel_${tabName}`);
   if (activeBtn) activeBtn.classList.add('active');
   if (activePanel) activePanel.classList.add('active');
-
-  const alertBox = document.getElementById('authAlert');
-  if (alertBox) alertBox.style.display = 'none';
 }
 
 function toggleEmailMode(mode) {
@@ -185,7 +249,7 @@ function showAuthAlert(msg, type = 'error') {
   alertBox.style.display = 'block';
 }
 
-// 1. Telegram Auth (Method 1: Deep Link Bot & Method 2: Direct Input)
+// 1. Telegram Auth (Deep Link Bot via @mrsignallo_bot)
 let tgPollingInterval = null;
 
 async function startTelegramBotAuth() {
@@ -210,12 +274,7 @@ async function startTelegramBotAuth() {
         if (pollData.verified && pollData.token) {
           clearInterval(tgPollingInterval);
           tgPollingInterval = null;
-          setAuthToken(pollData.token);
-          currentUser = pollData.user;
-          renderUserNav();
-          closeAuthModal();
-          notify(language === 'fa' ? `خوش آمدید ${currentUser.username}!` : `Welcome ${currentUser.username}!`);
-          if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
+          onAuthSuccess(pollData.user, pollData.token);
         }
       } catch (e) {}
     }, 1500);
@@ -245,35 +304,6 @@ function cancelTelegramBotAuth() {
   if (btnConnect) btnConnect.style.display = 'flex';
 }
 
-async function submitTelegramAuth() {
-  const input = document.getElementById('tgUsernameInput');
-  let val = input ? input.value.trim() : '';
-
-  if (!val) {
-    showAuthAlert(language === 'fa' ? 'لطفاً شناسه عددی یا آیدی تلگرام خود را وارد کنید.' : 'Please enter your Telegram ID or username.');
-    return;
-  }
-
-  val = val.replace(/^@/, '');
-  const isNumeric = /^[0-9]+$/.test(val);
-  const payload = isNumeric ? { telegram_id: val } : { username: val };
-
-  try {
-    const data = await apiFetch('/api/auth/telegram', {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    setAuthToken(data.token);
-    currentUser = data.user;
-    renderUserNav();
-    closeAuthModal();
-    notify(language === 'fa' ? `خوش آمدید ${currentUser.username}!` : `Welcome ${currentUser.username}!`);
-    if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
-  } catch (err) {
-    showAuthAlert(err.message);
-  }
-}
-
 // 2. Email Auth
 async function submitEmailAuth() {
   const emailInput = document.getElementById('authEmailInput');
@@ -298,12 +328,7 @@ async function submitEmailAuth() {
       method: 'POST',
       body: JSON.stringify(payload)
     });
-    setAuthToken(data.token);
-    currentUser = data.user;
-    renderUserNav();
-    closeAuthModal();
-    notify(language === 'fa' ? `ورود با موفقیت انجام شد!` : `Successfully signed in!`);
-    if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
+    onAuthSuccess(data.user, data.token);
   } catch (err) {
     showAuthAlert(err.message);
   }
@@ -331,13 +356,7 @@ async function connectWeb3Wallet() {
       method: 'POST',
       body: JSON.stringify({ address })
     });
-
-    setAuthToken(data.token);
-    currentUser = data.user;
-    renderUserNav();
-    closeAuthModal();
-    notify(language === 'fa' ? `کیف‌پول ${currentUser.username} متصل شد!` : `Wallet ${currentUser.username} connected!`);
-    if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
+    onAuthSuccess(data.user, data.token);
   } catch (err) {
     showAuthAlert(err.message);
   }
@@ -353,6 +372,8 @@ async function logout() {
   currentUser = null;
   toggleUserDropdown(false);
   renderUserNav();
+  if (typeof setCoin === 'function') setCoin('BTC', false);
+  if (typeof renderCoinChips === 'function') renderCoinChips('BTC');
   notify(language === 'fa' ? 'از حساب کاربری خارج شدید.' : 'Logged out successfully.');
   if (typeof updateSubscriptionUI === 'function') updateSubscriptionUI();
 }

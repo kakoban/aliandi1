@@ -48,23 +48,39 @@ function renderCoinChips(activeSymbol) {
   const current = (activeSymbol || coin()).trim().toUpperCase().replace(/USDT$/, '');
   const all = getAllCoins();
   const customList = getCustomCoins();
+  const isLoggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
 
   let html = all.map(sym => {
     const isCustom = customList.includes(sym);
     const isActive = sym === current;
-    if (isCustom) {
-      return `<button type="button" class="custom-coin" data-coin="${sym}" aria-pressed="${isActive}" onclick="setCoin('${sym}')">
-        <span>${sym}</span>
-        <span class="remove-coin-btn" onclick="event.stopPropagation(); removeCustomCoin('${sym}')" title="حذف">×</span>
+    const isLocked = !isLoggedIn && sym !== 'BTC';
+
+    if (sym === 'BTC') {
+      return `<button type="button" class="coin-btc-free" data-coin="BTC" aria-pressed="${isActive}" onclick="setCoin('BTC')">
+        <span>BTC</span>
+        <small class="coin-free-tag">FREE</small>
       </button>`;
     }
-    return `<button type="button" data-coin="${sym}" aria-pressed="${isActive}" onclick="setCoin('${sym}')">${sym}</button>`;
+
+    if (isCustom) {
+      return `<button type="button" class="custom-coin ${isLocked ? 'locked-coin' : ''}" data-coin="${sym}" aria-pressed="${isActive}" onclick="setCoin('${sym}')" title="${isLocked ? 'Sign in with Telegram to unlock' : sym}">
+        <span>${sym}</span>
+        ${isLocked ? '<span class="coin-lock-icon">🔒</span>' : ''}
+        <span class="remove-coin-btn" onclick="event.stopPropagation(); removeCustomCoin('${sym}')" title="Delete">×</span>
+      </button>`;
+    }
+
+    return `<button type="button" class="${isLocked ? 'locked-coin' : ''}" data-coin="${sym}" aria-pressed="${isActive}" onclick="setCoin('${sym}')" title="${isLocked ? 'Sign in with Telegram to unlock' : sym}">
+      <span>${sym}</span>
+      ${isLocked ? '<span class="coin-lock-icon">🔒</span>' : ''}
+    </button>`;
   }).join('');
 
   html += `
-    <button type="button" class="btn-add-coin" onclick="openAddCoinModal()" title="افزودن ارز جدید">
+    <button type="button" class="btn-add-coin ${!isLoggedIn ? 'locked-add-coin' : ''}" onclick="openAddCoinModal()" title="${!isLoggedIn ? 'Sign in with Telegram to add coins' : 'Add Coin'}">
       <span>+</span>
       <span data-fa="ارز جدید" data-en="Add Coin">${(typeof language !== 'undefined' && language === 'fa') ? 'ارز جدید' : 'Add Coin'}</span>
+      ${!isLoggedIn ? '<span class="coin-lock-icon" style="font-size:8px;">🔒</span>' : ''}
     </button>
   `;
 
@@ -72,6 +88,13 @@ function renderCoinChips(activeSymbol) {
 }
 
 function openAddCoinModal() {
+  const isLoggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
+  if (!isLoggedIn) {
+    if (typeof promptAuthForCoin === 'function') {
+      promptAuthForCoin('NEW_COIN');
+      return;
+    }
+  }
   const modal = document.getElementById('addCoinModal');
   if (modal) {
     modal.style.display = 'flex';
@@ -178,7 +201,17 @@ function renderQuote() {
  * Fetch live price from multi-exchange proxy (Zero CORS, Zero Geo-block)
  */
 async function fetchPrice(targetSymbol) {
-  const symbol = (targetSymbol || coin()).trim().toUpperCase().replace(/USDT$/, '');
+  const raw = (typeof targetSymbol === 'string' && targetSymbol) ? targetSymbol : coin();
+  const symbol = String(raw || 'BTC').trim().toUpperCase().replace(/USDT$/, '');
+  const isLoggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
+
+  if (symbol !== 'BTC' && !isLoggedIn) {
+    if (typeof promptAuthForCoin === 'function') {
+      promptAuthForCoin(symbol);
+    }
+    return;
+  }
+
   if (!validCoin(symbol)) {
     calculate();
     const symEl = document.getElementById('symbol');

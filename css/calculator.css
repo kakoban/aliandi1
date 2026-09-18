@@ -101,6 +101,47 @@
   font-weight: 700;
 }
 
+.chips button.coin-btc-free {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.coin-free-tag {
+  font-size: 8px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--success);
+  background: var(--success-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid var(--success-border);
+  letter-spacing: 0.5px;
+}
+
+.chips button.locked-coin {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.88;
+}
+
+.chips button.locked-coin:hover {
+  border-color: rgba(240, 185, 11, 0.45);
+  color: var(--brand-primary);
+  opacity: 1;
+}
+
+.coin-lock-icon {
+  font-size: 9px;
+  opacity: 0.65;
+  transition: opacity var(--transition-fast);
+}
+
+.chips button:hover .coin-lock-icon {
+  opacity: 1;
+}
+
 .chips button.btn-add-coin {
   background-color: rgba(240, 185, 11, 0.08);
   border: 1px dashed var(--brand-primary);

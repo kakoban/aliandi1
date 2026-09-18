@@ -438,18 +438,30 @@ function setDirection(next) {
 }
 
 function setCoin(symbol, autoFetch = true) {
+  const cleanSym = (symbol || 'BTC').trim().toUpperCase().replace(/USDT$/, '');
+  const isLoggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
+
+  if (cleanSym !== 'BTC' && !isLoggedIn) {
+    if (typeof promptAuthForCoin === 'function') {
+      promptAuthForCoin(cleanSym);
+    } else if (typeof openAuthModal === 'function') {
+      openAuthModal('telegram');
+    }
+    return;
+  }
+
   cancelQuote();
-  $('symbol').value = symbol;
-  const e = samplePrices[symbol] || 65000;
+  $('symbol').value = cleanSym;
+  const e = samplePrices[cleanSym] || 65000;
   $('entry').value = e;
   $('stop').value = priceValue(e * (1 - direction * 0.02));
   $('target').value = priceValue(e * (1 + direction * 0.06));
 
   if (typeof renderCoinChips === 'function') {
-    renderCoinChips(symbol);
+    renderCoinChips(cleanSym);
   } else {
     document.querySelectorAll('[data-coin]').forEach(el => {
-      el.setAttribute('aria-pressed', String(el.dataset.coin === symbol));
+      el.setAttribute('aria-pressed', String(el.dataset.coin === cleanSym));
     });
   }
 
@@ -462,7 +474,7 @@ function setCoin(symbol, autoFetch = true) {
   } catch (e) {}
 
   if (autoFetch && typeof fetchPrice === 'function') {
-    fetchPrice(symbol);
+    fetchPrice(cleanSym);
   }
 }
 

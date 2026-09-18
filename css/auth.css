@@ -276,6 +276,38 @@ html[lang="en"] .user-chip {
   margin: 0;
 }
 
+.auth-alert {
+  display: none;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  text-align: start;
+}
+
+.auth-alert.info {
+  background: rgba(240, 185, 11, 0.1);
+  border: 1px solid rgba(240, 185, 11, 0.4);
+  color: var(--text-primary-soft);
+}
+
+.auth-alert.info b {
+  color: var(--brand-primary);
+}
+
+.auth-alert.error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+}
+
+.auth-alert.success {
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success);
+}
+
 /* Auth Provider Tabs */
 .auth-tabs {
   display: grid;
